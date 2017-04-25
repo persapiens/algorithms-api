@@ -1,5 +1,6 @@
 package org.persapiens.sort;
 
+import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
@@ -14,101 +15,101 @@ public class MaxHeapsortTest {
 	
 	@Test
 	public void emptyArray () {
-		int[] items = new int[] {};
+		Integer[] items = new Integer[] {};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{});
+			.isEqualTo(new Integer[]{});
 	}
 	
 	@Test
 	public void singleArray () {
-		int[] items = new int[] {5};
+		Integer[] items = new Integer[] {5};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{5});
+			.isEqualTo(new Integer[]{5});
 	}	
 	
 	@Test
 	public void twoElementsSorted () {
-		int[] items = new int[] {1,2};
+		Integer[] items = new Integer[] {1,2};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2});
+			.isEqualTo(new Integer[]{1,2});
 	}	
 	
 	@Test
 	public void twoElementsUnsorted () {
-		int[] items = new int[] {2,1};
+		Integer[] items = new Integer[] {2,1};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2});
+			.isEqualTo(new Integer[]{1,2});
 	}	
 	
 	@Test
 	public void threeElementsSorted () {
-		int[] items = new int[] {1,2,3};
+		Integer[] items = new Integer[] {1,2,3};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 	
 	@Test
 	public void threeElements132 () {
-		int[] items = new int[] {1,3,2};
+		Integer[] items = new Integer[] {1,3,2};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 	
 	@Test
 	public void threeElements213 () {
-		int[] items = new int[] {2,1,3};
+		Integer[] items = new Integer[] {2,1,3};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 	
 	@Test
 	public void threeElements231 () {
-		int[] items = new int[] {2,3,1};
+		Integer[] items = new Integer[] {2,3,1};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 	
 	@Test
 	public void threeElements312 () {
-		int[] items = new int[] {3,1,2};
+		Integer[] items = new Integer[] {3,1,2};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 	
 	@Test
 	public void threeElements321 () {
-		int[] items = new int[] {3,2,1};
+		Integer[] items = new Integer[] {3,2,1};
 		
 		items = maxHeapsort().sort(items);
 		
 		assertThat(items)
-			.isEqualTo(new int[]{1,2,3});
+			.isEqualTo(new Integer[]{1,2,3});
 	}	
 }

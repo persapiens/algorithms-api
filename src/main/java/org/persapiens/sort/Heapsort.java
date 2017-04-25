@@ -38,8 +38,8 @@ public class Heapsort implements Sort {
 	/**
 	 * Troca os valores de dois elementos em um array.
 	 */
-	int[] exchange(int[] items, int first, int second) {
-		int buffer = items[first];
+	<T extends Comparable> T[] exchange(T[] items, int first, int second) {
+		T buffer = items[first];
 		items[first] = items[second];
 		items[second] = buffer;
 		return items;
@@ -50,13 +50,13 @@ public class Heapsort implements Sort {
 	 * Se for ascendente, cria um maxHeap.
 	 * Caso seja descentente, cria um minHeap.
 	 */
-	boolean compare(int first, int second) {
+	boolean compare(Comparable first, Comparable second) {
 		boolean result;
 		if (ascending) {
-			result = first > second;
+			result = first.compareTo(second) > 0;
 		}
 		else {
-			result = first < second;
+			result = second.compareTo(first) > 0;
 		}
 		return result;
 	}
@@ -65,7 +65,7 @@ public class Heapsort implements Sort {
 	 * comparando o no raiz com as folhas
 	 * se houver necessidade de mudanca, repete-se a recursivamente na folha.
 	 */
-	void heapify(int[] items, int length, int i) {
+	void heapify(Comparable[] items, int length, int i) {
 		int l = left(i);
 		int r = right(i);
 		
@@ -90,7 +90,7 @@ public class Heapsort implements Sort {
 	/**
 	 * Percorre os nos nao folhas para construir o heap.
 	 */
-	int[] buildHeap(int[] items) {
+	<T extends Comparable> T[] buildHeap(T[] items) {
 		// varrendo os nos que nao sao folhas
 		for(int counter = (items.length / 2) - 1; counter >= 0; counter --) {
 			heapify(items, items.length, counter);
@@ -99,7 +99,7 @@ public class Heapsort implements Sort {
 	}	
 	
 	@Override
-	public int[] sort(int[] items) {
+	public <T extends Comparable> T[] sort(T[] items) {
 		// constroi o heap maximo
 		items = buildHeap(items);
 		
