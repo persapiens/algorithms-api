@@ -37,7 +37,7 @@ public class MergeSort extends AbstractSort {
         int n1 = q - p + 1;
         List<T> L = new ArrayList<>();
         for (int i = 0; i < n1; i++) {
-            L.add(i, items.get(p + i - 1));
+            L.add(i, items.get(p + i));
         }
         
         int n2 = r - q;
