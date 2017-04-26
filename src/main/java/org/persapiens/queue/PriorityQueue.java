@@ -2,7 +2,7 @@ package org.persapiens.queue;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.persapiens.sort.Heapsort;
+import org.persapiens.sort.HeapSort;
 
 /**
  *
@@ -17,7 +17,7 @@ public class PriorityQueue <T extends Comparable> {
 		this.heapSize = items.size();
 	}
 	
-	private Heapsort heapsort = Heapsort.builder().ascending(true).build();
+	private HeapSort heapSort = HeapSort.builder().ascending(true).build();
 	
 	public T maximum() {
 		return items.get(0);
@@ -31,7 +31,7 @@ public class PriorityQueue <T extends Comparable> {
 		T max = items.get(0);
 		items.set(0, items.get(heapSize -1));
 		heapSize --;
-		heapsort.heapify(items, heapSize, 0);
+		heapSort.heapify(items, heapSize, 0);
 		
 		return max;
 	}
@@ -43,9 +43,9 @@ public class PriorityQueue <T extends Comparable> {
 		
 		items.set(i, key);
 		
-		while ((i > 0) && (items.get(heapsort.parent(i)).compareTo(items.get(i)) < 0)) {
-			heapsort.exchange(items, i, heapsort.parent(i));
-			i = heapsort.parent(i);
+		while ((i > 0) && (items.get(heapSort.parent(i)).compareTo(items.get(i)) < 0)) {
+			heapSort.exchange(items, i, heapSort.parent(i));
+			i = heapSort.parent(i);
 		}
 	}
 	

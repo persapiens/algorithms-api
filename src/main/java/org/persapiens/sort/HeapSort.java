@@ -1,20 +1,22 @@
 package org.persapiens.sort;
 
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author marcelo
  */
-@Builder
-public class Heapsort implements Sort {	
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class HeapSort extends AbstractSort {	
 	
-	@Getter @Setter
-	private boolean ascending = true;
-	
+    @Builder
+    public HeapSort(boolean ascending) {
+        super(ascending);
+    }
+    
 	/**
 	 * Calcula o indice do no pai.
 	 */
@@ -34,32 +36,6 @@ public class Heapsort implements Sort {
 	 */
 	int right(int i) {
 		return ((i+1) * 2);
-	}
-
-	/**
-	 * Troca os valores de dois elementos em um array.
-	 */
-	public <T extends Comparable> List<T> exchange(List<T> items, int first, int second) {
-		T buffer = items.get(first);
-		items.set(first, items.get(second));
-		items.set(second, buffer);
-		return items;
-	}
-
-	/**
-	 * Compara dois valores.
-	 * Se for ascendente, cria um maxHeap.
-	 * Caso seja descentente, cria um minHeap.
-	 */
-	<T extends Comparable> boolean compare(T first, T second) {
-		boolean result;
-		if (ascending) {
-			result = first.compareTo(second) > 0;
-		}
-		else {
-			result = second.compareTo(first) > 0;
-		}
-		return result;
 	}
 	
 	/**
