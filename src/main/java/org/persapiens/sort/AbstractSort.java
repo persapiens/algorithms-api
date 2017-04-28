@@ -35,7 +35,13 @@ public abstract class AbstractSort implements Sort {
 	 */
 	<T extends Comparable> boolean compare(T first, T second) {
 		boolean result;
-		if (ascending) {
+		if (first == null) {
+			result = true;
+		}
+		else if (second == null) {
+			 result = false;
+		} 
+		else if (ascending) {
 			result = first.compareTo(second) > 0;
 		}
 		else {

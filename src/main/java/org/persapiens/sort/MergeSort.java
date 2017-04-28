@@ -23,27 +23,27 @@ public class MergeSort extends AbstractSort {
         return mergeSort(items, 0, items.size() -1);
 	}
     
-    private <T extends Comparable> List<T> mergeSort(List<T> items, int p, int r) {
-        if (p < r) {
-            int q = (p + r) / 2;
-            items = mergeSort(items, p, q);
-            items = mergeSort(items, q +1, r);
-            items = merge(items, p, q, r);
+    private <T extends Comparable> List<T> mergeSort(List<T> items, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+            items = mergeSort(items, left, middle);
+            items = mergeSort(items, middle +1, right);
+            items = merge(items, left, middle, right);
         }
         return items;
     }
     
-    private <T extends Comparable> List<T> merge(List<T> items, int p, int q, int r) {
-        int n1 = q - p + 1;
+    private <T extends Comparable> List<T> merge(List<T> items, int left, int middle, int right) {
+        int n1 = middle - left + 1;
         List<T> L = new ArrayList<>();
         for (int i = 0; i < n1; i++) {
-            L.add(i, items.get(p + i));
+            L.add(i, items.get(left + i));
         }
-        
-        int n2 = r - q;
+
+        int n2 = right - middle;
         List<T> R = new ArrayList<>();
         for (int j = 0; j < n2; j++) {
-            R.add(j, items.get(q + j));
+            R.add(j, items.get(middle + j +1));
         }
         
         L.add(n1, null);
@@ -52,13 +52,13 @@ public class MergeSort extends AbstractSort {
         int i = 0;
         int j = 0;
         
-        for(int k = p; k < r; k++) {
-            if (L.get(i).compareTo(R.get(j)) <= 0) {
+        for(int k = left; k <= right; k++) {
+            if (!compare(L.get(i), R.get(j))) {
                 items.set(k, L.get(i));
                 i++;
             }
-            else {
-                items.set(k, R.get(j));
+			else {
+				items.set(k, R.get(j));
                 j++;
             }
         }
