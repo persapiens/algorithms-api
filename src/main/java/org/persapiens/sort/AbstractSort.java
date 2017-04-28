@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class AbstractSort implements Sort {
+public abstract class AbstractSort <T extends Comparable> implements Sort <T>{
 	
 	@Getter @Setter
 	private boolean ascending = true;
@@ -21,7 +21,7 @@ public abstract class AbstractSort implements Sort {
 	/**
 	 * Troca os valores de dois elementos em um array.
 	 */
-	public <T extends Comparable> List<T> exchange(List<T> items, int first, int second) {
+	public List<T> exchange(List<T> items, int first, int second) {
 		T buffer = items.get(first);
 		items.set(first, items.get(second));
 		items.set(second, buffer);
@@ -33,7 +33,7 @@ public abstract class AbstractSort implements Sort {
 	 * Se for ascendente, cria um maxHeap.
 	 * Caso seja descentente, cria um minHeap.
 	 */
-	<T extends Comparable> boolean compare(T first, T second) {
+	boolean compare(T first, T second) {
 		boolean result;
 		if (first == null) {
 			result = true;

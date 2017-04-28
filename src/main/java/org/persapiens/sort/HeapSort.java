@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @author marcelo
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class HeapSort extends AbstractSort {	
+public class HeapSort <T extends Comparable> extends AbstractSort <T> {	
 	
     @Builder
     public HeapSort(boolean ascending) {
@@ -45,7 +45,7 @@ public class HeapSort extends AbstractSort {
 	 * @param length tamanho do array a ser considerado
 	 * @param i indice do no a ser calculado o heap
 	 */
-	public <T extends Comparable> void heapify(List<T> items, int length, int i) {
+	public void heapify(List<T> items, int length, int i) {
 		int l = left(i);
 		int r = right(i);
 		
@@ -70,7 +70,7 @@ public class HeapSort extends AbstractSort {
 	/**
 	 * Percorre os nos nao folhas para construir o heap.
 	 */
-	<T extends Comparable> List<T> buildHeap(List<T> items) {
+	List<T> buildHeap(List<T> items) {
 		// varrendo os nos que nao sao folhas
 		for(int counter = (items.size() / 2) - 1; counter >= 0; counter --) {
 			heapify(items, items.size(), counter);
@@ -79,7 +79,7 @@ public class HeapSort extends AbstractSort {
 	}	
 	
 	@Override
-	public <T extends Comparable> List<T> sort(List<T> items) {
+	public List<T> sort(List<T> items) {
 		// constroi o heap maximo
 		items = buildHeap(items);
 		

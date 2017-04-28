@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @author marcelo
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class QuickSort extends AbstractSort {	
+public class QuickSort <T extends Comparable> extends AbstractSort<T> {	
 	
     @Builder
     public QuickSort(boolean ascending) {
@@ -20,7 +20,7 @@ public class QuickSort extends AbstractSort {
 	/**
 	 * Realizando o particionamento, retornando o pivo
 	 */
-	<T extends Comparable> int partition(List<T> items, int p, int r) {
+	int partition(List<T> items, int p, int r) {
 		T x = items.get(r);
 		int i = p -1;
 		for (int j = p; j <= r -1; j++) {
@@ -33,7 +33,7 @@ public class QuickSort extends AbstractSort {
 		return i + 1;
 	}
 	
-	<T extends Comparable> List<T> quickSort(List<T> items, int p, int r) {	
+	List<T> quickSort(List<T> items, int p, int r) {	
 		if (p < r) {
 			int q = partition(items, p, r);
 			items = quickSort(items, p, q - 1);
@@ -43,7 +43,7 @@ public class QuickSort extends AbstractSort {
 	}
 	
 	@Override
-	public <T extends Comparable> List<T> sort(List<T> items) {
+	public List<T> sort(List<T> items) {
 		return quickSort(items, 0, items.size()-1);
 	}	
 }

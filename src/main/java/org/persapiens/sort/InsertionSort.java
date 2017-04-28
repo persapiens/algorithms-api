@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @author marcelo
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class InsertionSort extends AbstractSort {	
+public class InsertionSort <T extends Comparable> extends AbstractSort <T> {	
 
     @Builder
     public InsertionSort(boolean ascending) {
@@ -18,7 +18,7 @@ public class InsertionSort extends AbstractSort {
     }
     
 	@Override
-	public <T extends Comparable> List<T> sort(List<T> items) {
+	public List<T> sort(List<T> items) {
 		for(int counter = 1; counter < items.size(); counter ++) {
             T key = items.get(counter);
                     
