@@ -46,8 +46,8 @@ public class MergeSort extends AbstractSort {
             R.add(j, items.get(q + j));
         }
         
-        L.set(n1, null);
-        R.set(n2, null);
+        L.add(n1, null);
+        R.add(n2, null);
         
         int i = 0;
         int j = 0;

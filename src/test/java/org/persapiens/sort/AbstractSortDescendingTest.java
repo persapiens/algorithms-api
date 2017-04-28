@@ -91,5 +91,17 @@ public abstract class AbstractSortDescendingTest extends AbstractSortTest {
 		assertThat(sort.sort(arrayBuilder.fourElementsDescendingSorted()))
 			.isEqualTo(arrayBuilder.fourElementsDescendingSorted());
 	}	
+	
+	@Test
+	public void tenElementsAscendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsAscendingSorted()))
+			.isEqualTo(arrayBuilder.tenElementsDescendingSorted());
+	}	
+	
+	@Test
+	public void tenElementsDescendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsDescendingSorted()))
+			.isEqualTo(arrayBuilder.tenElementsDescendingSorted());
+	}	
     
 }
