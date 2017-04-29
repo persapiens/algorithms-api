@@ -8,13 +8,13 @@ import org.testng.annotations.Test;
  *
  * @author marcelo
  */
-public abstract class AbstractSortTest <T> {
-    ArrayBuilder<T> arrayBuilder;
+public abstract class AbstractSortTest <B extends Comparable, T extends Comparable> {
+    ArrayBuilder<B,T> arrayBuilder;
     
 	Sort sort;
 
     abstract Sort createSort();
-	abstract ArrayBuilder<T> createArrayBuilder();
+	abstract ArrayBuilder<B,T> createArrayBuilder();
 
     @BeforeClass
     protected void init() {
@@ -119,17 +119,38 @@ public abstract class AbstractSortTest <T> {
 	}	
 	
 	@Test
-	public void tenElementsAscendingSorted () {
-		assertThat(sort.sort(arrayBuilder.tenElementsAscendingSorted()))
-			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsAscendingSorted()
-				: arrayBuilder.tenElementsDescendingSorted());
+	public void tenElementsWith1DigitAscendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsWith1DigitAscendingSorted()))
+			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsWith1DigitAscendingSorted()
+				: arrayBuilder.tenElementsWith1DigitDescendingSorted());
 	}	
 	
 	@Test
-	public void tenElementsDescendingSorted () {
-		assertThat(sort.sort(arrayBuilder.tenElementsDescendingSorted()))
-			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsAscendingSorted()
-				: arrayBuilder.tenElementsDescendingSorted());
+	public void tenElementsWith1DigitDescendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsWith1DigitDescendingSorted()))
+			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsWith1DigitAscendingSorted()
+				: arrayBuilder.tenElementsWith1DigitDescendingSorted());
+	}	
+	
+	@Test
+	public void tenElementsWith2DigitsAscendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsWith2DigitsAscendingSorted()))
+			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsWith2DigitsAscendingSorted()
+				: arrayBuilder.tenElementsWith2DigitsDescendingSorted());
+	}	
+	
+	@Test
+	public void tenElementsWith2DigitsDescendingSorted () {
+		assertThat(sort.sort(arrayBuilder.tenElementsWith2DigitsDescendingSorted()))
+			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsWith2DigitsAscendingSorted()
+				: arrayBuilder.tenElementsWith2DigitsDescendingSorted());
+	}	
+	
+	@Test
+	public void tenElementsWith2Digits () {
+		assertThat(sort.sort(arrayBuilder.tenElementsWith2Digits()))
+			.isEqualTo(sort.isAscending() ? arrayBuilder.tenElementsWith2DigitsAscendingSorted()
+				: arrayBuilder.tenElementsWith2DigitsDescendingSorted());
 	}	
 	
 	@Test

@@ -4,14 +4,15 @@ package org.persapiens.sort;
  *
  * @author marcelo
  */
-public class HeapSortMaxTest extends AbstractSortTest  <Integer>{
+public class HeapSortMaxTest extends AbstractSortTest  <Integer, Integer>{
     @Override
     protected Sort createSort() {
         return HeapSort.builder().ascending(true).build();
     }
 
 	@Override
-	ArrayBuilder<Integer> createArrayBuilder() {
-		return new ArrayBuilder<Integer>(new IdentidadeTransformar<Integer>());
+	ArrayBuilder<Integer, Integer> createArrayBuilder() {
+		return new ArrayBuilder<>(new IdentidadeTransformar<Integer>()
+			, new IdentidadeArrayTransformar<Integer>());
 	}
 }

@@ -4,7 +4,7 @@ package org.persapiens.sort;
  *
  * @author marcelo
  */
-public class CountSortDescendingTest extends AbstractSortTest <CountSortRegistry<Integer>>{
+public class CountSortDescendingTest extends AbstractSortTest <CountSortRegistry<Integer>, CountSortRegistry<Integer>>{
 
     @Override
     protected Sort createSort() {
@@ -15,7 +15,8 @@ public class CountSortDescendingTest extends AbstractSortTest <CountSortRegistry
     }
 
 	@Override
-	ArrayBuilder<CountSortRegistry<Integer>> createArrayBuilder() {
-		return new ArrayBuilder<>(new CountSortRegistryTransformar());
+	ArrayBuilder<CountSortRegistry<Integer>, CountSortRegistry<Integer>> createArrayBuilder() {
+		return new ArrayBuilder<>(new CountSortRegistryTransformar()
+			, new IdentidadeArrayTransformar<CountSortRegistry<Integer>>());
 	}
 }

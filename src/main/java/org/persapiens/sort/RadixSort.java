@@ -47,22 +47,12 @@ public class RadixSort extends AbstractSort <Integer> {
 	}
 
 	private Integer extractDigit(Integer item, int digit) {
-		return (item % power(10, (digit+1)) ) / power (10, digit);
-	}
-
-	public int power(int a, int b)
-    {
-		int power = 1;
-		for(int c=0;c<b;c++)
-		{
-			power*=a;
-		}
-		return power;
+		return (item % SortUtil.power(10, (digit+1)) ) / SortUtil.power (10, digit);
 	}
 
 	private List<Integer> addDigitItems(List<Integer> result, List<Integer> digitItems, int digit) {
 		for(int i = 0; i < result.size(); i++) {
-			result.set(i, result.get(i) + digitItems.get(i) * power(10, digit));
+			result.set(i, result.get(i) + digitItems.get(i) * SortUtil.power(10, digit));
 		}
 		return result;
 	}

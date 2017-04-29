@@ -4,7 +4,7 @@ package org.persapiens.sort;
  *
  * @author marcelo
  */
-public class RadixSortDescendingTest extends AbstractSortTest <Integer> {
+public class RadixSortDescendingTest extends AbstractSortTest <Integer, Integer> {
 
     @Override
     protected Sort createSort() {
@@ -15,7 +15,8 @@ public class RadixSortDescendingTest extends AbstractSortTest <Integer> {
     }
 
 	@Override
-	ArrayBuilder<Integer> createArrayBuilder() {
-		return new ArrayBuilder<Integer>(new IdentidadeTransformar<Integer>());
+	ArrayBuilder<Integer, Integer> createArrayBuilder() {
+		return new ArrayBuilder<>(new IdentidadeTransformar<Integer>()
+			, new IdentidadeArrayTransformar<Integer>());
 	}
 }
