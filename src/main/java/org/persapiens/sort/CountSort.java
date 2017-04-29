@@ -6,16 +6,15 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author marcelo
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CountSort extends AbstractSort <Integer> {	
+public class CountSort <T extends CountSortRegistry<V>, V> extends AbstractSort <T> {	
 	
-	@Getter @Setter
+	@Getter
 	private int k;
 	
     @Builder
@@ -25,11 +24,11 @@ public class CountSort extends AbstractSort <Integer> {
     }    
 	
 	@Override
-	public List<Integer> sort(List<Integer> items) {
+	public List<T> sort(List<T> items) {
 		// criando o resultado com valores iniciais a zero
-		List<Integer> result = new ArrayList<>(items.size());
+		List<T> result = new ArrayList<>(items.size());
 		for(int i = 0; i < items.size(); i++) {
-			result.add(0);
+			result.add(null);
 		}
 		
 		// criando a lista C com valores zero
@@ -40,7 +39,7 @@ public class CountSort extends AbstractSort <Integer> {
 		
 		// C[i] contera quantas vezes cada numero i aparece
 		for(int i = 0; i < items.size(); i++) {
-			C[items.get(i)] = C[items.get(i)] + 1;
+			C[items.get(i).getKey()] = C[items.get(i).getKey()] + 1;
 		}
 		
 		if (isAscending()) {
@@ -57,8 +56,8 @@ public class CountSort extends AbstractSort <Integer> {
 		}
 		
 		for(int i = items.size()-1; i >= 0; i--) {
-			result.set(C[items.get(i)]-1, items.get(i));
-			C[items.get(i)] = C[items.get(i)] -1;
+			result.set(C[items.get(i).getKey()]-1, items.get(i));
+			C[items.get(i).getKey()] = C[items.get(i).getKey()] -1;
 		}
 		
 		return result;

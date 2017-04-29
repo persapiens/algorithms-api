@@ -4,10 +4,14 @@ package org.persapiens.sort;
  *
  * @author marcelo
  */
-public class HeapSortMaxTest extends AbstractSortTest  <Integer>{
+public class RadixSortAscendingTest extends AbstractSortTest <Integer>{
+
     @Override
     protected Sort createSort() {
-        return HeapSort.builder().ascending(true).build();
+        return RadixSort.builder()
+			.ascending(true)
+			.d(3)
+			.build();
     }
 
 	@Override
