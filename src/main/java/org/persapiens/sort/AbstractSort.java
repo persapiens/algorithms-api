@@ -33,7 +33,8 @@ public abstract class AbstractSort <T extends Comparable> implements Sort <T>{
 	 * Se for ascendente, cria um maxHeap.
 	 * Caso seja descentente, cria um minHeap.
 	 */
-	boolean compare(T first, T second) {
+	@Override
+	public boolean compare(T first, T second) {
 		boolean result;
 		if (first == null) {
 			result = true;

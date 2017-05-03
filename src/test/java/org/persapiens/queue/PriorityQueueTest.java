@@ -1,6 +1,5 @@
 package org.persapiens.queue;
 
-import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
@@ -10,13 +9,43 @@ import org.testng.annotations.Test;
  */
 public class PriorityQueueTest {
 	@Test
-	public void emptyArray () {
-		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-		priorityQueue.setItems(Arrays.asList(15, 13, 9, 5, 12, 8, 7, 4, 0, 6, 2, 1));
+	public void arrayWith12Elements () {
+		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(true);
+		priorityQueue.insert(0);
+		priorityQueue.insert(1);
+		priorityQueue.insert(2);		
+		priorityQueue.insert(4);		
+		priorityQueue.insert(5);		
+		priorityQueue.insert(6);		
+		priorityQueue.insert(7);		
+		priorityQueue.insert(8);		
+		priorityQueue.insert(9);		
+		priorityQueue.insert(12);		
+		priorityQueue.insert(13);		
+		priorityQueue.insert(15);
 		
-		Integer k = priorityQueue.extractMax();
-		
-		assertThat(k)
+		assertThat(priorityQueue.extractMax())
 			.isEqualTo(15);
+		
+		assertThat(priorityQueue.maximum())
+			.isEqualTo(13);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(13);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(12);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(9);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(8);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(7);
+		
+		assertThat(priorityQueue.extractMax())
+			.isEqualTo(6);
 	}
 }
