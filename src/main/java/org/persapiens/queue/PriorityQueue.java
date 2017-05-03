@@ -11,13 +11,13 @@ import org.persapiens.sort.HeapSort;
 public class PriorityQueue <T extends Comparable> {
 	private List<T> items = new ArrayList<>();
 	private int heapSize = 0;
-
-	public void setItems(List<T> items) {
-		this.items = new ArrayList(items);
-		this.heapSize = items.size();
-	}
-	
+	private boolean ascending = true;
 	private HeapSort heapSort = HeapSort.builder().ascending(true).build();
+
+	public PriorityQueue(boolean ascending) {
+		this.ascending = ascending;
+		this.heapSort = HeapSort.builder().ascending(ascending).build();	
+	}
 	
 	public T maximum() {
 		return items.get(0);
@@ -36,14 +36,14 @@ public class PriorityQueue <T extends Comparable> {
 		return max;
 	}
 	
-	public void increaseKey(int i, T key) {
-		if (key.compareTo(items.get(i)) < 0) {
+	void increaseKey(int i, T key) {
+		if (heapSort.compare(key, items.get(i))) {
 			throw new IllegalArgumentException("New key " + key + " is smaller than current key " + items.get(i));
 		}
 		
 		items.set(i, key);
 		
-		while ((i > 0) && (items.get(heapSort.parent(i)).compareTo(items.get(i)) < 0)) {
+		while ((i > 0) && (heapSort.compare(items.get(i), items.get(heapSort.parent(i))))) {
 			heapSort.exchange(items, i, heapSort.parent(i));
 			i = heapSort.parent(i);
 		}
@@ -51,7 +51,7 @@ public class PriorityQueue <T extends Comparable> {
 	
 	public void insert (T key) {
 		heapSize ++;
-		items.set(heapSize-1, null);
+		items.add(heapSize-1, null);
 		increaseKey(heapSize-1, key);
 	}
 }
