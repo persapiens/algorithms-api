@@ -3,7 +3,6 @@ package org.persapiens.algorithms.tree;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
@@ -24,7 +23,7 @@ public class TreeNode <T extends Comparable> {
 	@Override
 	public String toString() {
 		String result = key.toString();
-		result += "l" + ((left != null) ? left.getKey().toString() : "");
+		//result += "l" + ((left != null) ? left.getKey().toString() : "");
 		//result += "r" + ((right != null) ? right.getKey().toString() : "");
 		//result += "p" + ((parent != null) ? parent.getKey().toString() : "");
 		return result;

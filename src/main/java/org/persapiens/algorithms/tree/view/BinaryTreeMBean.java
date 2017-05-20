@@ -93,11 +93,16 @@ public class BinaryTreeMBean implements Serializable {
 			organigramNode.setDraggable(true);
 
 			buildOrganigram(node.getLeft(), organigramNode);
-			buildOrganigram(node.getRight(), organigramNode);
+			OrganigramNode organigramNodeRight =  buildOrganigram(node.getRight(), organigramNode);
+			
+			if ((node.getLeft() != null) && (node.getRight() == null)) {
+				buildOrganigram(null, organigramNodeRight);
+				buildOrganigram(null, organigramNodeRight);
+			} 
 		}
 		else {
 			organigramNode = new DefaultOrganigramNode("division", "", organigramNodeParent);
-			organigramNode.setCollapsible(false);
+			organigramNode.setCollapsible(true);
 			organigramNode.setDroppable(false);
 			organigramNode.setSelectable(false);
 			organigramNode.setExpanded(false);
