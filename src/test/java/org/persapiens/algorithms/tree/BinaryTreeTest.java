@@ -1,7 +1,5 @@
 package org.persapiens.algorithms.tree;
 
-import org.persapiens.algorithms.tree.TreeNode;
-import org.persapiens.algorithms.tree.BinaryTree;
 import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;

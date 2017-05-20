@@ -17,13 +17,18 @@
         </h:head>
 
         <h:body>            
-            <h:form>
+            <h:form id="formOptions">
                 <p:panel>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="key" />
                         <p:inputText value="#{binaryTreeMBean.key}" />
                                      
                         <p:commandButton value="Adicionar" update=":form:organigram" actionListener="#{binaryTreeMBean.addKeyAction()}"/>
+                        
+                        <h:outputLabel value="Key selecionada:" />
+                        <h:outputLabel id="keySelecionada" value="#{binaryTreeMBean.selection.data}"/>
+                                     
+                        <p:commandButton value="Remover" update=":form:organigram keySelecionada" actionListener="#{binaryTreeMBean.deleteKeyAction()}"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
@@ -58,8 +63,7 @@
                               selection="#{binaryTreeMBean.selection}"
                               style="width: 100%">
 
-                    <p:ajax event="dragdrop" process="@this" update="@form:growl" listener="#{binaryTreeMBean.nodeDragDropListener}" />
-                    <p:ajax event="select" process="@this" update="@form:growl" listener="#{binaryTreeMBean.nodeSelectListener}" />
+                    <p:ajax event="select" process="@this" update="@form:growl :formOptions:keySelecionada" listener="#{binaryTreeMBean.nodeSelectListener}" />
                     <p:ajax event="contextmenu" process="@this" />
                     <p:ajax event="collapse" process="@this" update="@form:growl" listener="#{binaryTreeMBean.nodeCollapseListener}" />
                     <p:ajax event="expand" process="@this" update="@form:growl" listener="#{binaryTreeMBean.nodeExpandListener}" />
@@ -83,7 +87,7 @@
 
                 <p:contextMenu for="organigram" nodeType="employee">
                     <p:menuitem value="remover"
-                                update="organigram"
+                                update="organigram :formOptions:keySelecionada"
                                 icon="ui-icon-close"
                                 actionListener="#{binaryTreeMBean.deleteKeyAction()}" />
                 </p:contextMenu>

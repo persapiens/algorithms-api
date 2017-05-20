@@ -30,7 +30,6 @@ import org.persapiens.algorithms.tree.BinaryTree;
 import org.persapiens.algorithms.tree.TreeNode;
 import org.primefaces.component.organigram.OrganigramHelper;
 import org.primefaces.event.organigram.OrganigramNodeCollapseEvent;
-import org.primefaces.event.organigram.OrganigramNodeDragDropEvent;
 import org.primefaces.event.organigram.OrganigramNodeExpandEvent;
 import org.primefaces.event.organigram.OrganigramNodeSelectEvent;
 import org.primefaces.model.DefaultOrganigramNode;
@@ -87,10 +86,10 @@ public class BinaryTreeMBean implements Serializable {
 		if (node != null) {
 			organigramNode = new DefaultOrganigramNode("employee", node, organigramNodeParent);
 			organigramNode.setCollapsible(true);
-			organigramNode.setDroppable(true);
+			organigramNode.setDroppable(false);
 			organigramNode.setSelectable(true);
 			organigramNode.setExpanded(true);
-			organigramNode.setDraggable(true);
+			organigramNode.setDraggable(false);
 
 			buildOrganigram(node.getLeft(), organigramNode);
 			OrganigramNode organigramNodeRight =  buildOrganigram(node.getRight(), organigramNode);
@@ -177,14 +176,6 @@ public class BinaryTreeMBean implements Serializable {
         return divisionNode;
     }
 	*/
-
-    public void nodeDragDropListener(OrganigramNodeDragDropEvent event) {
-        FacesMessage message = new FacesMessage();
-        message.setSummary("Node '" + event.getOrganigramNode().getData() + "' moved from " + event.getSourceOrganigramNode().getData() + " to '" + event.getTargetOrganigramNode().getData() + "'");
-        message.setSeverity(FacesMessage.SEVERITY_INFO);
- 
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
  
     public void nodeSelectListener(OrganigramNodeSelectEvent event) {
         FacesMessage message = new FacesMessage();
@@ -208,12 +199,6 @@ public class BinaryTreeMBean implements Serializable {
         message.setSeverity(FacesMessage.SEVERITY_INFO);
  
         FacesContext.getCurrentInstance().addMessage(null, message);
-    }
- 
-    public void removeDivision() {
-        // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
-        OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
-        setMessage(currentSelection.getData() + " will entfernt werden.", FacesMessage.SEVERITY_INFO);
     }
  
     public void addEmployee() {

@@ -1,6 +1,5 @@
 package org.persapiens.algorithms.queue;
 
-import org.persapiens.algorithms.queue.PriorityQueue;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 

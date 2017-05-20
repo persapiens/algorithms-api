@@ -1,8 +1,5 @@
 package org.persapiens.algorithms.sort;
 
-import org.persapiens.algorithms.sort.QuickSort;
-import org.persapiens.algorithms.sort.Sort;
-
 /**
  *
  * @author marcelo

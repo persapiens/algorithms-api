@@ -1,6 +1,5 @@
 package org.persapiens.algorithms.sort;
 
-import org.persapiens.algorithms.sort.Sort;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

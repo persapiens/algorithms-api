@@ -1,6 +1,5 @@
 package org.persapiens.algorithms.sort;
 
-import org.persapiens.algorithms.sort.SortUtil;
 import java.util.ArrayList;
 import java.util.List;
 
