@@ -1,5 +1,6 @@
 package org.persapiens.algorithms.tree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,10 @@ import lombok.Getter;
 @Builder
 @Getter
 @AllArgsConstructor
-public class BinaryTree <T extends Comparable> {
+public class BinaryTree <T extends Comparable> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private TreeNode<T> root;
 	
 	private boolean iterativeSearch;
@@ -30,7 +34,7 @@ public class BinaryTree <T extends Comparable> {
 	}
 	
 	private TreeNode<T> iterativeSearch(TreeNode<T> x, T k) {
-		while ((x != null) && !k.equals(x.getKey())) {
+		while (x != null && !k.equals(x.getKey())) {
 			if (k.compareTo(x.getKey()) < 0) {
 				x = x.getLeft();
 			}
@@ -45,7 +49,7 @@ public class BinaryTree <T extends Comparable> {
 	private TreeNode<T> recursiveSearch(TreeNode<T> x, T k) {
 		TreeNode<T> result;
 		
-		if ((x == null) || k.equals(x.getKey())) {
+		if (x == null || k.equals(x.getKey())) {
 			result = x;
 		}
 		else {
@@ -81,7 +85,7 @@ public class BinaryTree <T extends Comparable> {
 	
 	private TreeNode<T> minimum(TreeNode<T> node) {
 		TreeNode<T> result = node;
-		while( (result != null) && (result.getLeft() != null) ) {
+		while( result != null && result.getLeft() != null ) {
 			result = result.getLeft();
 		}
 		return result;
@@ -93,7 +97,7 @@ public class BinaryTree <T extends Comparable> {
 	
 	private TreeNode<T> maximum(TreeNode<T> node) {
 		TreeNode<T> result = node;
-		while( (result != null) && (result.getRight() != null) ) {
+		while( result != null && result.getRight() != null ) {
 			result = result.getRight();
 		}
 		return result;
@@ -101,12 +105,12 @@ public class BinaryTree <T extends Comparable> {
 	
 	public TreeNode<T> successor(TreeNode<T> node) {
 		TreeNode<T> result = node;
-		if ( (result != null) && (result.getRight() != null) ) {
+		if ( result != null && result.getRight() != null ) {
 			result = minimum(result.getRight());
 		}
 		else {		
 			result = (result != null) ? result.getParent() : null;
-			while( (result != null) && (node.equals(result.getRight())) ) {
+			while( result != null && node.equals(result.getRight()) ) {
 				node = result;
 				result = result.getParent();
 			}
@@ -116,12 +120,12 @@ public class BinaryTree <T extends Comparable> {
 	
 	public TreeNode<T> predecessor(TreeNode<T> node) {
 		TreeNode<T> result = node;
-		if ( (result != null) && (result.getLeft() != null) ) {
+		if ( result != null && result.getLeft() != null ) {
 			result = maximum(result.getLeft());
 		}
 		else {		
 			result = (result != null) ? result.getParent() : null;
-			while( (result != null) && (node.equals(result.getLeft())) ) {
+			while( result != null && node.equals(result.getLeft()) ) {
 				node = result;
 				result = result.getParent();
 			}

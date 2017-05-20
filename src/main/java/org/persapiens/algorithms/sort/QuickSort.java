@@ -29,7 +29,7 @@ public class QuickSort <T extends Comparable> extends AbstractSort<T> {
 				items = exchange(items, i, j);
 			}
 		}
-		items = exchange(items, i+1, r);
+		exchange(items, i+1, r);
 		return i + 1;
 	}
 	

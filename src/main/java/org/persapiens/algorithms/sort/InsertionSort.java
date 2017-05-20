@@ -25,7 +25,7 @@ public class InsertionSort <T extends Comparable> extends AbstractSort <T> {
 			// Insert A[j]  into the sorted sequence A[1 .. j - 1].
 			int i = counter - 1;
 			
-            while( (i >= 0) && compare(items.get(i), key)) {
+            while( i >= 0 && compare(items.get(i), key)) {
                 items.set(i+1, items.get(i));
                 i --;
             }

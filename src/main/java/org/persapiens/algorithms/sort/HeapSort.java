@@ -28,14 +28,14 @@ public class HeapSort <T extends Comparable> extends AbstractSort <T> {
 	 * Calcula o indice do no raiz do lado esquerdo.
 	 */
 	int left(int i) {
-		return ((i+1) * 2) -1;
+		return (i+1) * 2 -1;
 	}
 
 	/**
 	 * Calcula o indice do no raiz do lado direito.
 	 */
 	int right(int i) {
-		return ((i+1) * 2);
+		return (i+1) * 2;
 	}
 	
 	/**
@@ -51,12 +51,14 @@ public class HeapSort <T extends Comparable> extends AbstractSort <T> {
 		
 		int largest;
 		
-		if ((l < length) && (compare(items.get(l), items.get(i)))) {
+		if (l < length && compare(items.get(l), items.get(i))) {
 			largest = l;
 		}
-		else largest = i;
+		else {
+			largest = i;
+		}
 		
-		if ((r < length) && (compare(items.get(r), items.get(largest)))) {
+		if (r < length && compare(items.get(r), items.get(largest))) {
 			largest = r;
 		}
 		
@@ -72,7 +74,7 @@ public class HeapSort <T extends Comparable> extends AbstractSort <T> {
 	 */
 	List<T> buildHeap(List<T> items) {
 		// varrendo os nos que nao sao folhas
-		for(int counter = (items.size() / 2) - 1; counter >= 0; counter --) {
+		for(int counter = items.size() / 2 - 1; counter >= 0; counter --) {
 			heapify(items, items.size(), counter);
 		}
 		return items;

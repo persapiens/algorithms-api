@@ -19,7 +19,7 @@ public class DistribuicaoUniformeArrayTransformar implements ArrayTransformar<In
 				int divisor = SortUtil.power(10, numberOfDigits);
 				for (int i = 0; i < entrada.size(); i++) {
 					int item = entrada.get(i);
-					result.add(new Double(item) / divisor);
+					result.add(Double.valueOf(item) / divisor);
 				}
 			}
 		}

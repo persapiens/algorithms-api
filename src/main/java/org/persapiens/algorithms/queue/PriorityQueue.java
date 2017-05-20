@@ -11,11 +11,9 @@ import org.persapiens.algorithms.sort.HeapSort;
 public class PriorityQueue <T extends Comparable> {
 	private List<T> items = new ArrayList<>();
 	private int heapSize = 0;
-	private boolean ascending = true;
 	private HeapSort heapSort = HeapSort.builder().ascending(true).build();
 
 	public PriorityQueue(boolean ascending) {
-		this.ascending = ascending;
 		this.heapSort = HeapSort.builder().ascending(ascending).build();	
 	}
 	
@@ -43,7 +41,7 @@ public class PriorityQueue <T extends Comparable> {
 		
 		items.set(i, key);
 		
-		while ((i > 0) && (heapSort.compare(items.get(i), items.get(heapSort.parent(i))))) {
+		while (i > 0 && heapSort.compare(items.get(i), items.get(heapSort.parent(i)))) {
 			heapSort.exchange(items, i, heapSort.parent(i));
 			i = heapSort.parent(i);
 		}

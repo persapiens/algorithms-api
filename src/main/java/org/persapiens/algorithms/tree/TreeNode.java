@@ -1,5 +1,6 @@
 package org.persapiens.algorithms.tree;
 
+import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class TreeNode <T extends Comparable> {
+public class TreeNode <T extends Comparable> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private T key;
 	
 	private TreeNode left;

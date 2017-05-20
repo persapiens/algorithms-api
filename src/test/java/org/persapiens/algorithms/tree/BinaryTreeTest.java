@@ -127,38 +127,48 @@ public class BinaryTreeTest {
 			.isEqualTo(node9);
 	}
 	
-	public void successor() {
+	public void successorPredecessorMinimumMaximum() {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
 		TreeNode<Integer> node15 = tree.insert(15);		
-		TreeNode<Integer> node6 = tree.insert(6);
-		TreeNode<Integer> node18 = tree.insert(18);		
-		TreeNode<Integer> node3 = tree.insert(3);
-		TreeNode<Integer> node7 = tree.insert(7);		
+		tree.insert(6);
+		tree.insert(18);		
+		tree.insert(3);
+		tree.insert(7);		
 		TreeNode<Integer> node17 = tree.insert(17);		
 		TreeNode<Integer> node20 = tree.insert(20);		
 		TreeNode<Integer> node2 = tree.insert(2);
-		TreeNode<Integer> node4 = tree.insert(4);		
+		tree.insert(4);		
 		TreeNode<Integer> node13 = tree.insert(13);
-		TreeNode<Integer> node9 = tree.insert(9);		
+		tree.insert(9);		
 		
 		assertThat(tree.successor(node15))
 			.isEqualTo(node17);
 		assertThat(tree.successor(node13))
 			.isEqualTo(node15);
+		
+		assertThat(tree.predecessor(node17))
+			.isEqualTo(node15);
+		assertThat(tree.predecessor(node15))
+			.isEqualTo(node13);
+		
+		assertThat(tree.minimum())
+			.isEqualTo(node2);
+		assertThat(tree.maximum())
+			.isEqualTo(node20);
 	}
 	
 	public void insert() {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
-		TreeNode<Integer> node12 = tree.insert(12);		
-		TreeNode<Integer> node5 = tree.insert(5);
-		TreeNode<Integer> node18 = tree.insert(18);		
-		TreeNode<Integer> node2 = tree.insert(2);
-		TreeNode<Integer> node9 = tree.insert(9);		
+		tree.insert(12);		
+		tree.insert(5);
+		tree.insert(18);		
+		tree.insert(2);
+		tree.insert(9);		
 		TreeNode<Integer> node15 = tree.insert(15);		
-		TreeNode<Integer> node19 = tree.insert(19);		
-		TreeNode<Integer> node17 = tree.insert(17);
+		tree.insert(19);		
+		tree.insert(17);
 		
 		TreeNode<Integer> node13 = tree.insert(13);
 		
@@ -169,10 +179,10 @@ public class BinaryTreeTest {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
 		TreeNode<Integer> node12 = tree.insert(12);		
-		TreeNode<Integer> node5 = tree.insert(5);
+		tree.insert(5);
 		TreeNode<Integer> node18 = tree.insert(18);		
-		TreeNode<Integer> node2 = tree.insert(2);
-		TreeNode<Integer> node9 = tree.insert(9);		
+		tree.insert(2);
+		tree.insert(9);		
 		TreeNode<Integer> node15 = tree.insert(15);		
 		TreeNode<Integer> node19 = tree.insert(19);		
 		TreeNode<Integer> node17 = tree.insert(17);
@@ -189,8 +199,8 @@ public class BinaryTreeTest {
 		TreeNode<Integer> node12 = tree.insert(12);		
 		TreeNode<Integer> node5 = tree.insert(5);
 		TreeNode<Integer> node18 = tree.insert(18);		
-		TreeNode<Integer> node2 = tree.insert(2);
-		TreeNode<Integer> node9 = tree.insert(9);		
+		tree.insert(2);
+		tree.insert(9);		
 		TreeNode<Integer> node15 = tree.insert(15);		
 
 		// caso b figure 12.4
