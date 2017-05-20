@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
  *
  * @author marcelo
  */
+@Test
 public class BinaryTreeTest {
 	void checkTreeNode(TreeNode<Integer> node, TreeNode<Integer> parent
 		, TreeNode<Integer> left, TreeNode<Integer> right) {
@@ -37,7 +38,6 @@ public class BinaryTreeTest {
 		}
 	}
 	
-	@Test
 	public void exampleACormenPage287 () {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
@@ -59,7 +59,6 @@ public class BinaryTreeTest {
 			.isEqualTo(Arrays.asList(2,5,5,6,7,8));
 	}
 	
-	@Test
 	public void exampleBCormenPage287 () {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
@@ -81,10 +80,17 @@ public class BinaryTreeTest {
 			.isEqualTo(Arrays.asList(2,5,5,6,7,8));
 	}
 	
-	@Test
 	public void exampleCormenPage290InterativeSearch () {
 		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().iterativeSearch(true).build();
-		
+		testSearch(tree);
+	}
+	
+	public void exampleCormenPage290RecursiveSearch () {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().iterativeSearch(false).build();
+		testSearch(tree);
+	}
+	
+	private void testSearch(BinaryTree<Integer> tree) {
 		TreeNode<Integer> node15 = tree.insert(15);		
 		TreeNode<Integer> node6 = tree.insert(6);
 		TreeNode<Integer> node18 = tree.insert(18);		
@@ -121,9 +127,8 @@ public class BinaryTreeTest {
 			.isEqualTo(node9);
 	}
 	
-	@Test
-	public void exampleCormenPage290RecursiveSearch () {
-		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().iterativeSearch(false).build();
+	public void successor() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
 		
 		TreeNode<Integer> node15 = tree.insert(15);		
 		TreeNode<Integer> node6 = tree.insert(6);
@@ -137,27 +142,96 @@ public class BinaryTreeTest {
 		TreeNode<Integer> node13 = tree.insert(13);
 		TreeNode<Integer> node9 = tree.insert(9);		
 		
-		assertThat(tree.search(15))
-			.isEqualTo(node15);
-		assertThat(tree.search(6))
-			.isEqualTo(node6);
-		assertThat(tree.search(18))
-			.isEqualTo(node18);
-		assertThat(tree.search(3))
-			.isEqualTo(node3);
-		assertThat(tree.search(7))
-			.isEqualTo(node7);
-		assertThat(tree.search(17))
+		assertThat(tree.successor(node15))
 			.isEqualTo(node17);
-		assertThat(tree.search(20))
-			.isEqualTo(node20);
-		assertThat(tree.search(2))
-			.isEqualTo(node2);
-		assertThat(tree.search(4))
-			.isEqualTo(node4);
-		assertThat(tree.search(13))
-			.isEqualTo(node13);
-		assertThat(tree.search(9))
-			.isEqualTo(node9);
+		assertThat(tree.successor(node13))
+			.isEqualTo(node15);
+	}
+	
+	public void insert() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
+		
+		TreeNode<Integer> node12 = tree.insert(12);		
+		TreeNode<Integer> node5 = tree.insert(5);
+		TreeNode<Integer> node18 = tree.insert(18);		
+		TreeNode<Integer> node2 = tree.insert(2);
+		TreeNode<Integer> node9 = tree.insert(9);		
+		TreeNode<Integer> node15 = tree.insert(15);		
+		TreeNode<Integer> node19 = tree.insert(19);		
+		TreeNode<Integer> node17 = tree.insert(17);
+		
+		TreeNode<Integer> node13 = tree.insert(13);
+		
+		checkTreeNode(node13, node15, null, null);		
+	}
+	
+	public void deleteCasoAFigura124() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
+		
+		TreeNode<Integer> node12 = tree.insert(12);		
+		TreeNode<Integer> node5 = tree.insert(5);
+		TreeNode<Integer> node18 = tree.insert(18);		
+		TreeNode<Integer> node2 = tree.insert(2);
+		TreeNode<Integer> node9 = tree.insert(9);		
+		TreeNode<Integer> node15 = tree.insert(15);		
+		TreeNode<Integer> node19 = tree.insert(19);		
+		TreeNode<Integer> node17 = tree.insert(17);
+
+		// caso a figure 12.4
+		tree.delete(node15);		
+		checkTreeNode(node17, node18, null, null);		
+		checkTreeNode(node18, node12, node17, node19);		
+	}
+	
+	public void deleteCasoBFigura124() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
+		
+		TreeNode<Integer> node12 = tree.insert(12);		
+		TreeNode<Integer> node5 = tree.insert(5);
+		TreeNode<Integer> node18 = tree.insert(18);		
+		TreeNode<Integer> node2 = tree.insert(2);
+		TreeNode<Integer> node9 = tree.insert(9);		
+		TreeNode<Integer> node15 = tree.insert(15);		
+
+		// caso b figure 12.4
+		tree.delete(node18);	
+		checkTreeNode(node12, null, node5, node15);
+		checkTreeNode(node15, node12, null, null);		
+	}
+	
+	public void deleteCasoCFigura124() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
+		
+		TreeNode<Integer> node12 = tree.insert(12);		
+		TreeNode<Integer> node5 = tree.insert(5);
+		TreeNode<Integer> node18 = tree.insert(18);		
+		TreeNode<Integer> node19 = tree.insert(19);		
+		TreeNode<Integer> node21 = tree.insert(21);
+		
+		// caso c figure 12.4
+		tree.delete(node12);
+		checkTreeNode(node18, null, node5, node19);		
+		checkTreeNode(node19, node18, null, node21);		
+		checkTreeNode(node21, node19, null, null);		
+		checkTreeNode(node5, node18, null, null);		
+	}
+	
+	public void deleteCasoDFigura124() {
+		BinaryTree<Integer> tree = BinaryTree.<Integer>builder().build();
+		
+		TreeNode<Integer> node8 = tree.insert(8);
+		TreeNode<Integer> node5 = tree.insert(5);
+		TreeNode<Integer> node18 = tree.insert(18);		
+		TreeNode<Integer> node16 = tree.insert(16);
+		TreeNode<Integer> node14 = tree.insert(14);		
+		TreeNode<Integer> node15 = tree.insert(15);		
+		
+		// caso d figure 12.4
+		tree.delete(node8);
+		checkTreeNode(node14, null, node5, node18);		
+		checkTreeNode(node5, node14, null, null);		
+		checkTreeNode(node18, node14, node16, null);
+		checkTreeNode(node16, node18, node15, null);
+		checkTreeNode(node15, node16, null, null);
 	}
 }

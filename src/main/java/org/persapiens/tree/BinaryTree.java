@@ -99,11 +99,7 @@ public class BinaryTree <T extends Comparable> {
 		return result;
 	}
 	
-	public TreeNode<T> successor() {
-		return successor(root);
-	}
-	
-	private TreeNode<T> successor(TreeNode<T> node) {
+	public TreeNode<T> successor(TreeNode<T> node) {
 		TreeNode<T> result = node;
 		if ( (result != null) && (result.getRight() != null) ) {
 			result = minimum(result.getRight());
@@ -118,11 +114,7 @@ public class BinaryTree <T extends Comparable> {
 		return result;
 	}
 	
-	public TreeNode<T> predecessor() {
-		return predecessor(root);
-	}
-	
-	private TreeNode<T> predecessor(TreeNode<T> node) {
+	public TreeNode<T> predecessor(TreeNode<T> node) {
 		TreeNode<T> result = node;
 		if ( (result != null) && (result.getLeft() != null) ) {
 			result = maximum(result.getLeft());

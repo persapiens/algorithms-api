@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
  *
  * @author marcelo
  */
+@Test
 public class PriorityQueueTest {
-	@Test
 	public void arrayWith12Elements () {
 		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(true);
 		priorityQueue.insert(0);
