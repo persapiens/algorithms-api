@@ -37,14 +37,14 @@ import org.primefaces.model.DefaultOrganigramNode;
 import org.primefaces.model.OrganigramNode;
 
 /**
- * BinaryTreeMBean to show graphically.
+ * IntegerBinaryTreeMBean to show graphically.
  * @author Marcelo Fernandes
  */
 @Getter
 @Setter
 @Named
 @ViewScoped
-public class BinaryTreeMBean implements Serializable {
+public class IntegerBinaryTreeMBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,33 +52,31 @@ public class BinaryTreeMBean implements Serializable {
     private OrganigramNode selection;
  
     private int key = 0;
- 
-    private String employeeName;
 
-	private IntegerBinaryTree binaryTree;
+	private IntegerBinaryTree tree;
 	
     @PostConstruct
     public void init() {
-		binaryTree = new IntegerBinaryTree(true);
-		binaryTree.insert(10);
-		binaryTree.insert(8);
-		binaryTree.insert(7);
-		binaryTree.insert(9);
-		binaryTree.insert(15);
-		binaryTree.insert(14);
-		binaryTree.insert(16);
-		binaryTree.insert(17);
-		binaryTree.insert(26);
-		binaryTree.insert(22);
-		binaryTree.insert(21);
-		binaryTree.insert(23);
-		binaryTree.insert(30);
-		binaryTree.insert(32);
-		binaryTree.insert(28);
-		binaryTree.insert(29);
-		binaryTree.insert(6);
+		tree = new IntegerBinaryTree();
+		tree.insert(10);
+		tree.insert(8);
+		tree.insert(7);
+		tree.insert(9);
+		tree.insert(15);
+		tree.insert(14);
+		tree.insert(16);
+		tree.insert(17);
+		tree.insert(26);
+		tree.insert(22);
+		tree.insert(21);
+		tree.insert(23);
+		tree.insert(30);
+		tree.insert(32);
+		tree.insert(28);
+		tree.insert(29);
+		tree.insert(6);
 		
-		rootNode = buildOrganigram(binaryTree.getRoot(), null);
+		rootNode = buildOrganigram(tree.getRoot(), null);
 		
         selection = rootNode;
 	}
@@ -113,9 +111,9 @@ public class BinaryTreeMBean implements Serializable {
 	}
 	
 	public void addKeyAction() {
-		binaryTree.insert(this.key);
+		tree.insert(this.key);
 		
-		rootNode = buildOrganigram(binaryTree.getRoot(), null);
+		rootNode = buildOrganigram(tree.getRoot(), null);
 		
         selection = rootNode;
 	}
@@ -125,9 +123,9 @@ public class BinaryTreeMBean implements Serializable {
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
 		
 		IntegerTreeNode treeNode = (IntegerTreeNode) currentSelection.getData();
-		binaryTree.delete(treeNode);
+		tree.delete(treeNode);
 		
-		rootNode = buildOrganigram(binaryTree.getRoot(), null);
+		rootNode = buildOrganigram(tree.getRoot(), null);
 		
         selection = rootNode;
     }
