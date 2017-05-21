@@ -26,24 +26,23 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.persapiens.algorithms.tree.IntegerRBBinaryTree;
-import org.persapiens.algorithms.tree.IntegerRBTreeNode;
+import org.persapiens.algorithms.tree.BinaryTree;
+import org.persapiens.algorithms.tree.TreeNode;
 import org.primefaces.component.organigram.OrganigramHelper;
 import org.primefaces.event.organigram.OrganigramNodeCollapseEvent;
 import org.primefaces.event.organigram.OrganigramNodeExpandEvent;
 import org.primefaces.event.organigram.OrganigramNodeSelectEvent;
-import org.primefaces.model.DefaultOrganigramNode;
 import org.primefaces.model.OrganigramNode;
 
 /**
- * RBBinaryTreeMBean to show graphically.
+ * IntegerBinaryTreeMBean to show graphically.
  * @author Marcelo Fernandes
  */
 @Getter
 @Setter
 @Named
 @ViewScoped
-public class IntegerRBBinaryTreeMBean implements Serializable {
+public abstract class AbstractIntegerTreeMBean <BT extends BinaryTree<TN, Integer>, TN extends TreeNode<TN, Integer>> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,59 +51,20 @@ public class IntegerRBBinaryTreeMBean implements Serializable {
  
     private int key = 0;
 
-	private IntegerRBBinaryTree tree;
+	private BT tree;
+	
+	protected abstract BT initTree();
 	
     @PostConstruct
     public void init() {
-		tree = new IntegerRBBinaryTree();
-		tree.insert(7);
-		tree.insert(4);
-		tree.insert(11);		
-		tree.insert(3);
-		tree.insert(6);		
-		tree.insert(9);		
-		tree.insert(18);
-		tree.insert(2);
-		tree.insert(14);
-		tree.insert(19);
-		tree.insert(12);
-		tree.insert(17);
-		tree.insert(22);
-		tree.insert(20);
+		tree = initTree();
 		
 		rootNode = buildOrganigram(tree.getRoot(), null);
 		
         selection = rootNode;
 	}
 	
-	protected OrganigramNode buildOrganigram(IntegerRBTreeNode node, OrganigramNode organigramNodeParent) {
-		OrganigramNode organigramNode = null;
-		if (node != null && !node.equals(tree.getNill()) ){
-			organigramNode = new DefaultOrganigramNode(node.getColor().toString().toLowerCase(), node, organigramNodeParent);
-			organigramNode.setCollapsible(true);
-			organigramNode.setDroppable(false);
-			organigramNode.setSelectable(true);
-			organigramNode.setExpanded(true);
-			organigramNode.setDraggable(false);
-
-			buildOrganigram(node.getLeft(), organigramNode);
-			OrganigramNode organigramNodeRight =  buildOrganigram(node.getRight(), organigramNode);
-			
-			if (node.getLeft() != null && (node.getRight() == null || node.getRight().equals(tree.getNill())) ) {
-				buildOrganigram(null, organigramNodeRight);
-				buildOrganigram(null, organigramNodeRight);
-			} 
-		}
-		else {
-			organigramNode = new DefaultOrganigramNode("division", "", organigramNodeParent);
-			organigramNode.setCollapsible(true);
-			organigramNode.setDroppable(false);
-			organigramNode.setSelectable(false);
-			organigramNode.setExpanded(false);
-			organigramNode.setDraggable(false);			
-		}
-		return organigramNode;
-	}
+	protected abstract OrganigramNode buildOrganigram(TN node, OrganigramNode organigramNodeParent);
 	
 	public void addKeyAction() {
 		tree.insert(this.key);
@@ -118,7 +78,7 @@ public class IntegerRBBinaryTreeMBean implements Serializable {
         // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
 		
-		IntegerRBTreeNode treeNode = (IntegerRBTreeNode) currentSelection.getData();
+		TN treeNode = (TN) currentSelection.getData();
 		tree.delete(treeNode);
 		
 		rootNode = buildOrganigram(tree.getRoot(), null);

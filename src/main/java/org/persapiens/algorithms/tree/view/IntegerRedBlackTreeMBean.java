@@ -21,52 +21,49 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.persapiens.algorithms.tree.IntegerBinaryTree;
-import org.persapiens.algorithms.tree.IntegerTreeNode;
+import org.persapiens.algorithms.tree.IntegerRedBlackTree;
+import org.persapiens.algorithms.tree.IntegerRedBlackTreeNode;
 import org.primefaces.model.DefaultOrganigramNode;
 import org.primefaces.model.OrganigramNode;
 
 /**
- * IntegerBinaryTreeMBean to show graphically.
+ * RBBinaryTreeMBean to show graphically.
  * @author Marcelo Fernandes
  */
 @Getter
 @Setter
 @Named
 @ViewScoped
-public class IntegerBinaryTreeMBean extends AbstractIntegerTreeMBean<IntegerBinaryTree, IntegerTreeNode> {
+public class IntegerRedBlackTreeMBean extends AbstractIntegerTreeMBean<IntegerRedBlackTree, IntegerRedBlackTreeNode> {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
-	protected IntegerBinaryTree initTree() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
-		tree.insert(10);
-		tree.insert(8);
+	protected IntegerRedBlackTree initTree() {
+		IntegerRedBlackTree tree = new IntegerRedBlackTree();
 		tree.insert(7);
-		tree.insert(9);
-		tree.insert(15);
+		tree.insert(4);
+		tree.insert(11);		
+		tree.insert(3);
+		tree.insert(6);		
+		tree.insert(9);		
+		tree.insert(18);
+		tree.insert(2);
 		tree.insert(14);
-		tree.insert(16);
+		tree.insert(19);
+		tree.insert(12);
 		tree.insert(17);
-		tree.insert(26);
 		tree.insert(22);
-		tree.insert(21);
-		tree.insert(23);
-		tree.insert(30);
-		tree.insert(32);
-		tree.insert(28);
-		tree.insert(29);
-		tree.insert(6);
+		tree.insert(20);
 		
 		return tree;
 	}
-	
+
 	@Override
-	protected OrganigramNode buildOrganigram(IntegerTreeNode node, OrganigramNode organigramNodeParent) {
+	protected OrganigramNode buildOrganigram(IntegerRedBlackTreeNode node, OrganigramNode organigramNodeParent) {
 		OrganigramNode organigramNode = null;
-		if (node != null) {
-			organigramNode = new DefaultOrganigramNode("employee", node, organigramNodeParent);
+		if (node != null && !node.equals(getTree().getNill()) ){
+			organigramNode = new DefaultOrganigramNode(node.getColor().toString().toLowerCase(), node, organigramNodeParent);
 			organigramNode.setCollapsible(true);
 			organigramNode.setDroppable(false);
 			organigramNode.setSelectable(true);
@@ -76,7 +73,7 @@ public class IntegerBinaryTreeMBean extends AbstractIntegerTreeMBean<IntegerBina
 			buildOrganigram(node.getLeft(), organigramNode);
 			OrganigramNode organigramNodeRight =  buildOrganigram(node.getRight(), organigramNode);
 			
-			if (node.getLeft() != null && node.getRight() == null) {
+			if (node.getLeft() != null && (node.getRight() == null || node.getRight().equals(getTree().getNill())) ) {
 				buildOrganigram(null, organigramNodeRight);
 				buildOrganigram(null, organigramNodeRight);
 			} 

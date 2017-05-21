@@ -9,7 +9,7 @@
     <f:view contentType="text/html">
 
         <h:head>            
-            <title>.:: Binary Tree ::.</title>
+            <title>.:: Red Black Tree ::.</title>
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
             <link href="#{resource['images/favicon.ico']}" rel="shortcut icon"/>
             <h:outputStylesheet name="algorithms.css" />
@@ -21,14 +21,14 @@
                 <p:panel>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="key" />
-                        <p:inputText value="#{integerRBBinaryTreeMBean.key}" />
+                        <p:inputText value="#{integerRedBlackTreeMBean.key}" />
                                      
-                        <p:commandButton value="Adicionar" update=":form:organigram" actionListener="#{integerRBBinaryTreeMBean.addKeyAction()}"/>
+                        <p:commandButton value="Adicionar" update=":form:organigram" actionListener="#{integerRedBlackTreeMBean.addKeyAction()}"/>
                         
                         <h:outputLabel value="Key selecionada:" />
-                        <h:outputLabel id="keySelecionada" value="#{integerRBBinaryTreeMBean.selection.data}"/>
+                        <h:outputLabel id="keySelecionada" value="#{integerRedBlackTreeMBean.selection.data}"/>
                                      
-                        <p:commandButton value="Remover" update=":form:organigram keySelecionada" actionListener="#{integerRBBinaryTreeMBean.deleteKeyAction()}"/>
+                        <p:commandButton value="Remover" update=":form:organigram keySelecionada" actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
@@ -62,37 +62,34 @@
 
                 <p:organigram id="organigram"
                               widgetVar="organigram"
-                              value="#{integerRBBinaryTreeMBean.rootNode}"
+                              value="#{integerRedBlackTreeMBean.rootNode}"
                               var="node"
                               leafNodeConnectorHeight="0"
                               autoScrollToSelection="true"
                               zoom="true"
-                              selection="#{integerRBBinaryTreeMBean.selection}"
+                              selection="#{integerRedBlackTreeMBean.selection}"
                               style="width: 100%">
 
-                    <p:ajax event="select" process="@this" update="@form:growl :formOptions:keySelecionada" listener="#{integerRBBinaryTreeMBean.nodeSelectListener}" />
+                    <p:ajax event="select" process="@this" update="@form:growl :formOptions:keySelecionada" listener="#{integerRedBlackTreeMBean.nodeSelectListener}" />
                     <p:ajax event="contextmenu" process="@this" />
-                    <p:ajax event="collapse" process="@this" update="@form:growl" listener="#{integerRBBinaryTreeMBean.nodeCollapseListener}" />
-                    <p:ajax event="expand" process="@this" update="@form:growl" listener="#{integerRBBinaryTreeMBean.nodeExpandListener}" />
-
-                    <p:organigramNode>
-                        <h:outputText value="#{node.data}" />
-                    </p:organigramNode>
+                    <p:ajax event="collapse" process="@this" update="@form:growl" listener="#{integerRedBlackTreeMBean.nodeCollapseListener}" />
+                    <p:ajax event="expand" process="@this" update="@form:growl" listener="#{integerRedBlackTreeMBean.nodeExpandListener}" />
 
                     <p:organigramNode type="division"
+                                      style="font-size: 11px; width: 25px; height: 25px;"
                                       styleClass="division"
                                       iconPos="left">        
                         <h:outputText value="#{node.data}" />
                     </p:organigramNode>
 
                     <p:organigramNode type="red"
-                                      style="font-size: 26px;"
+                                      style="font-size: 22px; width: 50px; height: 50px;"
                                       styleClass="red">
                         <h:outputText value="#{node.data}" />
                     </p:organigramNode>
 
                     <p:organigramNode type="black"
-                                      style="font-size: 26px;"
+                                      style="font-size: 22px; width: 50px; height: 50px;"
                                       styleClass="black">
                         <h:outputText value="#{node.data}" />
                     </p:organigramNode>
@@ -102,14 +99,14 @@
                     <p:menuitem value="remover"
                                 update="organigram :formOptions:keySelecionada"
                                 icon="ui-icon-close"
-                                actionListener="#{integerRBBinaryTreeMBean.deleteKeyAction()}" />
+                                actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}" />
                 </p:contextMenu>
                 
                 <p:contextMenu for="organigram" nodeType="black">
                     <p:menuitem value="remover"
                                 update="organigram :formOptions:keySelecionada"
                                 icon="ui-icon-close"
-                                actionListener="#{integerRBBinaryTreeMBean.deleteKeyAction()}" />
+                                actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}" />
                 </p:contextMenu>
             </h:form>
         </h:body>
