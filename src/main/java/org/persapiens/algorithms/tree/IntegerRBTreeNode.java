@@ -13,7 +13,7 @@ public class IntegerRBTreeNode extends RBTreeNode <IntegerRBTreeNode, Integer> {
 		super(key);
 	}
 
-	public IntegerRBTreeNode(RBTreeNodeType type, Integer key, IntegerRBTreeNode left, IntegerRBTreeNode right, IntegerRBTreeNode parent) {
+	public IntegerRBTreeNode(RBTreeNodeColor type, Integer key, IntegerRBTreeNode left, IntegerRBTreeNode right, IntegerRBTreeNode parent) {
 		super(type, key, left, right, parent);
 	}
 }

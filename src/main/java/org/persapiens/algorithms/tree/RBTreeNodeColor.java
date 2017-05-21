@@ -4,7 +4,7 @@ package org.persapiens.algorithms.tree;
  *
  * @author marcelo fernandes
  */
-public enum RBTreeNodeType {
+public enum RBTreeNodeColor {
 
 	RED,
 	

@@ -13,7 +13,7 @@ public class RBTreeNode <TN extends RBTreeNode<TN, T>, T extends Comparable> ext
 
 	private static final long serialVersionUID = 1L;
 
-	private RBTreeNodeType type;
+	private RBTreeNodeColor color;
 
 	public RBTreeNode() {
 		super();
@@ -23,9 +23,9 @@ public class RBTreeNode <TN extends RBTreeNode<TN, T>, T extends Comparable> ext
 		super(key);
 	}
 	
-	public RBTreeNode(RBTreeNodeType type, T key, TN left, TN right, TN parent) {
+	public RBTreeNode(RBTreeNodeColor color, T key, TN left, TN right, TN parent) {
 		super(key, left, right, parent);
-		this.type = type;
+		this.color = color;
 	}
 
 }
