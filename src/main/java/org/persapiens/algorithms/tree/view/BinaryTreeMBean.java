@@ -26,7 +26,8 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.persapiens.algorithms.tree.BinaryTree;
+import org.persapiens.algorithms.tree.IntegerBinaryTree;
+import org.persapiens.algorithms.tree.IntegerTreeNode;
 import org.persapiens.algorithms.tree.TreeNode;
 import org.primefaces.component.organigram.OrganigramHelper;
 import org.primefaces.event.organigram.OrganigramNodeCollapseEvent;
@@ -54,11 +55,11 @@ public class BinaryTreeMBean implements Serializable {
  
     private String employeeName;
 
-	private BinaryTree<Integer> binaryTree;
+	private IntegerBinaryTree binaryTree;
 	
     @PostConstruct
     public void init() {
-		binaryTree = BinaryTree.<Integer>builder().iterativeSearch(true).build();
+		binaryTree = new IntegerBinaryTree(true);
 		binaryTree.insert(10);
 		binaryTree.insert(8);
 		binaryTree.insert(7);
@@ -82,7 +83,7 @@ public class BinaryTreeMBean implements Serializable {
         selection = rootNode;
 	}
 	
-	protected OrganigramNode buildOrganigram(TreeNode<Integer> node, OrganigramNode organigramNodeParent) {
+	protected OrganigramNode buildOrganigram(TreeNode node, OrganigramNode organigramNodeParent) {
 		OrganigramNode organigramNode = null;
 		if (node != null) {
 			organigramNode = new DefaultOrganigramNode("employee", node, organigramNodeParent);
@@ -123,7 +124,7 @@ public class BinaryTreeMBean implements Serializable {
         // re-evaluate selection - might be a differenct object instance if viewstate serialization is enabled
         OrganigramNode currentSelection = OrganigramHelper.findTreeNode(rootNode, selection);
 		
-		TreeNode<Integer> treeNode = (TreeNode<Integer>) currentSelection.getData();
+		IntegerTreeNode treeNode = (IntegerTreeNode) currentSelection.getData();
 		binaryTree.delete(treeNode);
 		
 		rootNode = buildOrganigram(binaryTree.getRoot(), null);

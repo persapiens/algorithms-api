@@ -1,29 +1,37 @@
 package org.persapiens.algorithms.tree;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author marcelo fernandes
  */
-@Builder
 @Getter
-@AllArgsConstructor
-public class BinaryTree <T extends Comparable> implements Serializable {
+public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparable> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private TreeNode<T> root;
+	@Setter(AccessLevel.PROTECTED)
+	private TN root;
 	
 	private boolean iterativeSearch;
+
+	public BinaryTree() {
+		this(true);
+	}
 	
-	public TreeNode<T> search(T value) {
-		TreeNode<T> result;
+	public BinaryTree(boolean iterativeSearch) {
+		this.iterativeSearch = iterativeSearch;
+	}
+	
+	public TN search(T value) {
+		TN result;
 		if (iterativeSearch) {
 			result = iterativeSearch(root, value);
 		}
@@ -33,7 +41,7 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		return result;
 	}
 	
-	private TreeNode<T> iterativeSearch(TreeNode<T> x, T k) {
+	private TN iterativeSearch(TN x, T k) {
 		while (x != null && !k.equals(x.getKey())) {
 			if (k.compareTo(x.getKey()) < 0) {
 				x = x.getLeft();
@@ -46,8 +54,8 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		return x;
 	}
 	
-	private TreeNode<T> recursiveSearch(TreeNode<T> x, T k) {
-		TreeNode<T> result;
+	private TN recursiveSearch(TN x, T k) {
+		TN result;
 		
 		if (x == null || k.equals(x.getKey())) {
 			result = x;
@@ -69,7 +77,7 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 	}
 
 	// InorderTreeWalk
-	private List<T> sort(TreeNode<T> x, List<T> result) {
+	private List<T> sort(TN x, List<T> result) {
 		if (x != null) {
 			result = sort(x.getLeft(), result);
 			result.add(x.getKey());
@@ -79,32 +87,32 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		return result;
 	}
 	
-	public TreeNode<T> minimum() {
+	public TN minimum() {
 		return minimum(root);
 	}
 	
-	private TreeNode<T> minimum(TreeNode<T> node) {
-		TreeNode<T> result = node;
+	private TN minimum(TN node) {
+		TN result = node;
 		while( result != null && result.getLeft() != null ) {
 			result = result.getLeft();
 		}
 		return result;
 	}
 	
-	public TreeNode<T> maximum() {
+	public TN maximum() {
 		return maximum(root);
 	}
 	
-	private TreeNode<T> maximum(TreeNode<T> node) {
-		TreeNode<T> result = node;
+	private TN maximum(TN node) {
+		TN result = node;
 		while( result != null && result.getRight() != null ) {
 			result = result.getRight();
 		}
 		return result;
 	}
 	
-	public TreeNode<T> successor(TreeNode<T> node) {
-		TreeNode<T> result = node;
+	public TN successor(TN node) {
+		TN result = node;
 		if ( result != null && result.getRight() != null ) {
 			result = minimum(result.getRight());
 		}
@@ -118,8 +126,8 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		return result;
 	}
 	
-	public TreeNode<T> predecessor(TreeNode<T> node) {
-		TreeNode<T> result = node;
+	public TN predecessor(TN node) {
+		TN result = node;
 		if ( result != null && result.getLeft() != null ) {
 			result = maximum(result.getLeft());
 		}
@@ -133,17 +141,31 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		return result;
 	}
 	
-	public TreeNode<T> insert(T key) {
-		TreeNode<T> result = TreeNode.<T>builder().key(key).build();
+	protected TN createTN(T key) {
+		TN result = null;
+		
+		try {
+			Class<TN> treeNodeClass = (Class<TN>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+			result = treeNodeClass.newInstance();
+			result.setKey(key);
+		} catch (InstantiationException | IllegalAccessException ex) {
+			throw new RuntimeException(ex);
+		}
+		
+		return result;
+	}
+	
+	public TN insert(T key) {
+		TN result = createTN(key);
 		
 		insert(result);
 		
 		return result;
 	}
 	
-	private void insert(TreeNode<T> node) {
-		TreeNode<T> y = null;
-		TreeNode<T> x = root;
+	protected void insert(TN node) {
+		TN y = null;
+		TN x = root;
 		
 		while(x != null) {
 			y = x;
@@ -168,7 +190,7 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		}
 	}
 
-	private void transplant(TreeNode<T> u, TreeNode<T> v) {
+	private void transplant(TN u, TN v) {
 		if (u.getParent() == null) {
 			this.root = v;
 		}
@@ -183,7 +205,7 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 		}
 	}
 	
-	public void delete(TreeNode<T> z) {
+	public void delete(TN z) {
 		if (z.getLeft() == null) {
 			transplant(z, z.getRight());
 		}
@@ -191,7 +213,7 @@ public class BinaryTree <T extends Comparable> implements Serializable {
 			transplant(z, z.getLeft());
 		}
 		else {
-			TreeNode<T> y =  minimum(z.getRight());
+			TN y =  minimum(z.getRight());
 			if (!y.getParent().equals(z)) {
 				transplant(y, y.getRight());
 				y.setRight(z.getRight());

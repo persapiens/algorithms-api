@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
  * @author marcelo
  */
 @Test
-public class TreeNodeTest {
+public class IntegerTreeNodeTest {
 	public void testToString() {
-		TreeNode<Integer> node = TreeNode.<Integer>builder().key(3).build();
+		IntegerTreeNode node = new IntegerTreeNode(3);
 		assertThat(node.toString())
 			.isEqualTo("3");
 	}

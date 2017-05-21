@@ -1,7 +1,6 @@
 package org.persapiens.algorithms.tree;
 
 import java.io.Serializable;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,19 +10,32 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
-public class TreeNode <T extends Comparable> implements Serializable {
+public class TreeNode <TN extends TreeNode<TN, T>, T extends Comparable> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private T key;
 	
-	private TreeNode left;
+	private TN left;
 	
-	private TreeNode right;
+	private TN right;
 	
-	private TreeNode parent;
+	private TN parent;
 
+	public TreeNode() {
+	}
+	
+	public TreeNode(T key) {
+		this.key = key;
+	}
+	
+	public TreeNode(T key, TN left, TN right, TN parent) {
+		this.key = key;
+		this.left = left;
+		this.right = right;
+		this.parent = parent;
+	}
+	
 	@Override
 	public String toString() {
 		String result = key.toString();
@@ -31,7 +43,6 @@ public class TreeNode <T extends Comparable> implements Serializable {
 		//result += "r" + ((right != null) ? right.getKey().toString() : "");
 		//result += "p" + ((parent != null) ? parent.getKey().toString() : "");
 		return result;
-	}
-	
+	}	
 	
 }
