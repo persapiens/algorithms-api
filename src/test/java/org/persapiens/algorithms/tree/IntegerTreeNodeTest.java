@@ -14,4 +14,12 @@ public class IntegerTreeNodeTest {
 		assertThat(node.toString())
 			.isEqualTo("3");
 	}
+
+	public void testNillToString() {
+		IntegerRedBlackTree tree = new IntegerRedBlackTree(false);
+		
+		IntegerRedBlackTreeNode node = tree.getNill();
+		assertThat(node.toString())
+			.isEqualTo("");
+	}
 }

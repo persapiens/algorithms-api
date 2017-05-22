@@ -1,6 +1,8 @@
 package org.persapiens.algorithms.tree;
 
 import lombok.Getter;
+import static org.persapiens.algorithms.tree.RedBlackTreeNodeColor.BLACK;
+import static org.persapiens.algorithms.tree.RedBlackTreeNodeColor.RED;
 
 /**
  *
@@ -13,7 +15,7 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	
 	private TN createNill() {
 		TN result = createTN(null);
-		result.setColor(RedBlackTreeNodeColor.BLACK);
+		result.setColor(BLACK);
 		return result;
 	}
 	
@@ -96,26 +98,26 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 		}
 		node.setLeft(nill);
 		node.setRight(nill);
-		node.setColor(RedBlackTreeNodeColor.RED);
+		node.setColor(RED);
 		insertFixup(node);
 	}
 
 	private TN insertFixupLeft(TN node) {
 		TN y = node.getParent().getParent().getRight();
 		if (y.getColor().isRed()) {
-			node.getParent().setColor(RedBlackTreeNodeColor.BLACK);				// caso 1
-			y.setColor(RedBlackTreeNodeColor.BLACK);							// caso 1
-			node.getParent().getParent().setColor(RedBlackTreeNodeColor.RED);	// caso 1
-			node = node.getParent().getParent();								// caso 1
+			node.getParent().setColor(BLACK);				// caso 1
+			y.setColor(BLACK);								// caso 1
+			node.getParent().getParent().setColor(RED);		// caso 1
+			node = node.getParent().getParent();			// caso 1
 		}
 		else { 
 			if (node.equals(node.getParent().getRight())) {
-				node = node.getParent();										// caso 2
-				leftRotate(node);												// caso 2
+				node = node.getParent();					// caso 2
+				leftRotate(node);							// caso 2
 			}
-			node.getParent().setColor(RedBlackTreeNodeColor.BLACK);				// caso 3
-			node.getParent().getParent().setColor(RedBlackTreeNodeColor.RED);	// caso 3
-			rightRotate(node.getParent().getParent());							// caso 3
+			node.getParent().setColor(BLACK);				// caso 3
+			node.getParent().getParent().setColor(RED);		// caso 3
+			rightRotate(node.getParent().getParent());		// caso 3
 		}
 		return node;
 	}
@@ -123,19 +125,19 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	private TN insertFixupRight(TN node) {
 		TN y = node.getParent().getParent().getLeft();
 		if (y.getColor().isRed()) {
-			node.getParent().setColor(RedBlackTreeNodeColor.BLACK);				// caso 1
-			y.setColor(RedBlackTreeNodeColor.BLACK);							// caso 1
-			node.getParent().getParent().setColor(RedBlackTreeNodeColor.RED);	// caso 1
-			node = node.getParent().getParent();								// caso 1
+			node.getParent().setColor(BLACK);				// caso 1
+			y.setColor(BLACK);								// caso 1
+			node.getParent().getParent().setColor(RED);		// caso 1
+			node = node.getParent().getParent();			// caso 1
 		}
 		else { 
 			if (node.equals(node.getParent().getLeft())) {
-				node = node.getParent();										// caso 2
-				rightRotate(node);												// caso 2
+				node = node.getParent();					// caso 2
+				rightRotate(node);							// caso 2
 			}
-			node.getParent().setColor(RedBlackTreeNodeColor.BLACK);				// caso 3
-			node.getParent().getParent().setColor(RedBlackTreeNodeColor.RED);	// caso 3
-			leftRotate(node.getParent().getParent());							// caso 3
+			node.getParent().setColor(BLACK);				// caso 3
+			node.getParent().getParent().setColor(RED);		// caso 3
+			leftRotate(node.getParent().getParent());		// caso 3
 		}				
 		return node;		
 	}
@@ -149,7 +151,7 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 				node = insertFixupRight(node);
 			}
 		}
-		getRoot().setColor(RedBlackTreeNodeColor.BLACK);
+		getRoot().setColor(BLACK);
 	}
 
 	@Override
@@ -166,6 +168,7 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 			transplant(node, node.getLeft());
 		}
 		else {
+			y = minimum(node.getRight());
 			yOriginalColor = y.getColor();
 			x = y.getRight();
 			if (y.getParent().equals(node)) {
@@ -189,27 +192,27 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	private TN deleteFixupLeft(TN x) {
 		TN w = x.getParent().getRight();
 		if (w.getColor().isRed()) {
-			w.setColor(RedBlackTreeNodeColor.BLACK);					// caso 1
-			x.getParent().setColor(RedBlackTreeNodeColor.RED);			// caso 1
-			leftRotate(x.getParent());									// caso 1
-			w = x.getParent().getRight();								// caso 1
+			w.setColor(BLACK);										// caso 1
+			x.getParent().setColor(RED);							// caso 1
+			leftRotate(x.getParent());								// caso 1
+			w = x.getParent().getRight();							// caso 1
 		}
 		if (w.getLeft().getColor().isBlack() && w.getRight().getColor().isBlack()) {
-			w.setColor(RedBlackTreeNodeColor.RED);						// caso 2
-			x = x.getParent();											// caso 2
+			w.setColor(RED);										// caso 2
+			x = x.getParent();										// caso 2
 		}
 		else { 
 			if (w.getRight().getColor().isBlack()) {
-				w.getLeft().setColor(RedBlackTreeNodeColor.BLACK);		// caso 3
-				w.setColor(RedBlackTreeNodeColor.RED);					// caso 3
-				rightRotate(w);											// caso 3
-				w = x.getParent().getRight();							// caso 3
+				w.getLeft().setColor(BLACK);						// caso 3
+				w.setColor(RED);									// caso 3
+				rightRotate(w);										// caso 3
+				w = x.getParent().getRight();						// caso 3
 			}
-			w.setColor(x.getParent().getColor());						// caso 4
-			x.getParent().setColor(RedBlackTreeNodeColor.BLACK);		// caso 4
-			w.getRight().setColor(RedBlackTreeNodeColor.BLACK);			// caso 4
-			leftRotate(x.getParent());									// caso 4
-			x = getRoot();												// caso 4
+			w.setColor(x.getParent().getColor());					// caso 4
+			x.getParent().setColor(BLACK);							// caso 4
+			w.getRight().setColor(BLACK);							// caso 4
+			leftRotate(x.getParent());								// caso 4
+			x = getRoot();											// caso 4
 		}
 		return x;
 	}
@@ -217,27 +220,27 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	private TN deleteFixupRight(TN x) {
 		TN w = x.getParent().getLeft();
 		if (w.getColor().isRed()) {
-			w.setColor(RedBlackTreeNodeColor.BLACK);					// caso 1
-			x.getParent().setColor(RedBlackTreeNodeColor.RED);			// caso 1
-			rightRotate(x.getParent());									// caso 1
-			w = x.getParent().getLeft();								// caso 1
+			w.setColor(BLACK);										// caso 1
+			x.getParent().setColor(RED);							// caso 1
+			rightRotate(x.getParent());								// caso 1
+			w = x.getParent().getLeft();							// caso 1
 		}
 		if (w.getLeft().getColor().isBlack() && w.getRight().getColor().isBlack()) {
-			w.setColor(RedBlackTreeNodeColor.RED);						// caso 2
-			x = x.getParent();											// caso 2
+			w.setColor(RED);										// caso 2
+			x = x.getParent();										// caso 2
 		}
 		else { 
 			if (w.getLeft().getColor().isBlack()) {
-				w.getRight().setColor(RedBlackTreeNodeColor.BLACK);		// caso 3
-				w.setColor(RedBlackTreeNodeColor.RED);					// caso 3
-				leftRotate(w);											// caso 3
-				w = x.getParent().getLeft();							// caso 3
+				w.getRight().setColor(BLACK);						// caso 3
+				w.setColor(RED);									// caso 3
+				leftRotate(w);										// caso 3
+				w = x.getParent().getLeft();						// caso 3
 			}
-			w.setColor(x.getParent().getColor());						// caso 4
-			x.getParent().setColor(RedBlackTreeNodeColor.BLACK);		// caso 4
-			w.getLeft().setColor(RedBlackTreeNodeColor.BLACK);			// caso 4
-			rightRotate(x.getParent());									// caso 4
-			x = getRoot();												// caso 4
+			w.setColor(x.getParent().getColor());					// caso 4
+			x.getParent().setColor(BLACK);							// caso 4
+			w.getLeft().setColor(BLACK);							// caso 4
+			rightRotate(x.getParent());								// caso 4
+			x = getRoot();											// caso 4
 		}				
 		return x;
 	}
@@ -251,7 +254,7 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 				x = deleteFixupRight(x);
 			}
 		}
-		x.setColor(RedBlackTreeNodeColor.BLACK);
+		x.setColor(BLACK);
 	}
 	
 	public void transplant(TN u, TN v) {
@@ -265,6 +268,24 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 			u.getParent().setRight(v);
 		}
 		v.setParent(u.getParent());
+	}
+
+	@Override
+	public TN minimum(TN node) {
+		TN result = node;
+		while( !result.getLeft().equals(nill) ) {
+			result = result.getLeft();
+		}
+		return result;
+	}
+
+	@Override
+	public TN maximum(TN node) {
+		TN result = node;
+		while( !result.getRight().equals(nill) ) {
+			result = result.getRight();
+		}
+		return result;
 	}
 	
 }

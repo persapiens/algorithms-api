@@ -38,7 +38,8 @@ public class TreeNode <TN extends TreeNode<TN, T>, T extends Comparable> impleme
 	
 	@Override
 	public String toString() {
-		String result = key.toString();
+		String result = "";
+		result += (key != null) ? key.toString() : "";
 		//result += "l" + ((left != null) ? left.getKey().toString() : "");
 		//result += "r" + ((right != null) ? right.getKey().toString() : "");
 		//result += "p" + ((parent != null) ? parent.getKey().toString() : "");

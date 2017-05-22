@@ -9,15 +9,17 @@ import org.testng.annotations.Test;
  * @author marcelo
  */
 @Test
-public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
+public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest <IntegerBinaryTree, IntegerTreeNode, Integer> {
+	
 	public void exampleACormenPage287 () {
-		IntegerBinaryTree tree = new IntegerBinaryTree(true);
+		IntegerBinaryTree tree = createTree(true, 6, 5, 7, 2);
 		
-		IntegerTreeNode node6 = tree.insert(6);
-		IntegerTreeNode node5 = tree.insert(5);
-		IntegerTreeNode node7 = tree.insert(7);		
-		IntegerTreeNode node2 = tree.insert(2);		
-		IntegerTreeNode node5x = tree.insert(5);		
+		IntegerTreeNode node6 = tree.search(6);
+		IntegerTreeNode node5 = tree.search(5);
+		IntegerTreeNode node7 = tree.search(7);		
+		IntegerTreeNode node2 = tree.search(2);
+		
+		IntegerTreeNode node5x = tree.insert(5);
 		IntegerTreeNode node8 = tree.insert(8);		
 		
 		checkTreeNode(node6, null, node5, node7);		
@@ -32,13 +34,14 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void exampleBCormenPage287 () {
-		IntegerBinaryTree tree = new IntegerBinaryTree(false);
+		IntegerBinaryTree tree = createTree(false, 2, 5, 7, 6, 8);
 		
-		IntegerTreeNode node2 = tree.insert(2);		
-		IntegerTreeNode node5 = tree.insert(5);
-		IntegerTreeNode node7 = tree.insert(7);		
-		IntegerTreeNode node6 = tree.insert(6);
-		IntegerTreeNode node8 = tree.insert(8);		
+		IntegerTreeNode node2 = tree.search(2);		
+		IntegerTreeNode node5 = tree.search(5);
+		IntegerTreeNode node7 = tree.search(7);		
+		IntegerTreeNode node6 = tree.search(6);
+		IntegerTreeNode node8 = tree.search(8);
+		
 		IntegerTreeNode node5x = tree.insert(5);		
 		
 		checkTreeNode(node2, null, null, node5);		
@@ -53,12 +56,12 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void exampleCormenPage290InterativeSearch () {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true);
 		testSearch(tree);
 	}
 	
 	public void exampleCormenPage290RecursiveSearch () {
-		IntegerBinaryTree tree = new IntegerBinaryTree(false);
+		IntegerBinaryTree tree = createTree(false);
 		testSearch(tree);
 	}
 	
@@ -100,19 +103,13 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void successorPredecessorMinimumMaximum() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9);
 		
-		IntegerTreeNode node15 = tree.insert(15);		
-		tree.insert(6);
-		tree.insert(18);		
-		tree.insert(3);
-		tree.insert(7);		
-		IntegerTreeNode node17 = tree.insert(17);		
-		IntegerTreeNode node20 = tree.insert(20);		
-		IntegerTreeNode node2 = tree.insert(2);
-		tree.insert(4);		
-		IntegerTreeNode node13 = tree.insert(13);
-		tree.insert(9);		
+		IntegerTreeNode node15 = tree.search(15);		
+		IntegerTreeNode node17 = tree.search(17);		
+		IntegerTreeNode node20 = tree.search(20);		
+		IntegerTreeNode node2 = tree.search(2);
+		IntegerTreeNode node13 = tree.search(13);
 		
 		assertThat(tree.successor(node15))
 			.isEqualTo(node17);
@@ -131,33 +128,23 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void insert() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 12, 5, 18, 2, 9, 15, 19, 17, 13);
 		
-		tree.insert(12);		
-		tree.insert(5);
-		tree.insert(18);		
-		tree.insert(2);
-		tree.insert(9);		
-		IntegerTreeNode node15 = tree.insert(15);		
-		tree.insert(19);		
-		tree.insert(17);
+		IntegerTreeNode node15 = tree.search(15);		
 		
-		IntegerTreeNode node13 = tree.insert(13);
+		IntegerTreeNode node13 = tree.search(13);
 		
 		checkTreeNode(node13, node15, null, null);		
 	}
 	
 	public void deleteCasoAFigura124() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 12, 5, 18, 2, 9, 15, 19, 17);
 		
-		IntegerTreeNode node12 = tree.insert(12);		
-		tree.insert(5);
-		IntegerTreeNode node18 = tree.insert(18);		
-		tree.insert(2);
-		tree.insert(9);		
-		IntegerTreeNode node15 = tree.insert(15);		
-		IntegerTreeNode node19 = tree.insert(19);		
-		IntegerTreeNode node17 = tree.insert(17);
+		IntegerTreeNode node12 = tree.search(12);		
+		IntegerTreeNode node18 = tree.search(18);		
+		IntegerTreeNode node15 = tree.search(15);		
+		IntegerTreeNode node19 = tree.search(19);		
+		IntegerTreeNode node17 = tree.search(17);
 
 		// caso a figure 12.4
 		tree.delete(node15);		
@@ -166,14 +153,12 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void deleteCasoBFigura124() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 12, 5, 18, 2, 9, 15);
 		
-		IntegerTreeNode node12 = tree.insert(12);		
-		IntegerTreeNode node5 = tree.insert(5);
-		IntegerTreeNode node18 = tree.insert(18);		
-		tree.insert(2);
-		tree.insert(9);		
-		IntegerTreeNode node15 = tree.insert(15);		
+		IntegerTreeNode node12 = tree.search(12);		
+		IntegerTreeNode node5 = tree.search(5);
+		IntegerTreeNode node18 = tree.search(18);		
+		IntegerTreeNode node15 = tree.search(15);		
 
 		// caso b figure 12.4
 		tree.delete(node18);	
@@ -182,13 +167,13 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void deleteCasoCFigura124() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 12, 5, 18, 19, 21);
 		
-		IntegerTreeNode node12 = tree.insert(12);		
-		IntegerTreeNode node5 = tree.insert(5);
-		IntegerTreeNode node18 = tree.insert(18);		
-		IntegerTreeNode node19 = tree.insert(19);		
-		IntegerTreeNode node21 = tree.insert(21);
+		IntegerTreeNode node12 = tree.search(12);
+		IntegerTreeNode node5 = tree.search(5);
+		IntegerTreeNode node18 = tree.search(18);		
+		IntegerTreeNode node19 = tree.search(19);		
+		IntegerTreeNode node21 = tree.search(21);
 		
 		// caso c figure 12.4
 		tree.delete(node12);
@@ -199,14 +184,14 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest {
 	}
 	
 	public void deleteCasoDFigura124() {
-		IntegerBinaryTree tree = new IntegerBinaryTree();
+		IntegerBinaryTree tree = createTree(true, 8, 5, 18, 16, 14, 15);
 		
-		IntegerTreeNode node8 = tree.insert(8);
-		IntegerTreeNode node5 = tree.insert(5);
-		IntegerTreeNode node18 = tree.insert(18);		
-		IntegerTreeNode node16 = tree.insert(16);
-		IntegerTreeNode node14 = tree.insert(14);		
-		IntegerTreeNode node15 = tree.insert(15);		
+		IntegerTreeNode node8 = tree.search(8);
+		IntegerTreeNode node5 = tree.search(5);
+		IntegerTreeNode node18 = tree.search(18);		
+		IntegerTreeNode node16 = tree.search(16);
+		IntegerTreeNode node14 = tree.search(14);		
+		IntegerTreeNode node15 = tree.search(15);		
 		
 		// caso d figure 12.4
 		tree.delete(node8);

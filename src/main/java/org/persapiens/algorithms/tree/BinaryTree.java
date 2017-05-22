@@ -19,7 +19,8 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 
 	@Setter(AccessLevel.PROTECTED)
 	private TN root;
-	
+
+	@Setter
 	private boolean iterativeSearch;
 
 	public BinaryTree() {
@@ -91,7 +92,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return minimum(root);
 	}
 	
-	private TN minimum(TN node) {
+	public TN minimum(TN node) {
 		TN result = node;
 		while( result != null && result.getLeft() != null ) {
 			result = result.getLeft();
@@ -103,7 +104,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return maximum(root);
 	}
 	
-	private TN maximum(TN node) {
+	public TN maximum(TN node) {
 		TN result = node;
 		while( result != null && result.getRight() != null ) {
 			result = result.getRight();
