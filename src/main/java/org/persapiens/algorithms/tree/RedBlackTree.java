@@ -291,4 +291,16 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	public boolean isEmpty() {
 		return this.getRoot().equals(this.nill);
 	}
+
+	public int getBlackHeight(TN node) {
+		int result = 0;
+		while (!node.equals(this.nill))
+		{
+			if (node.getColor().equals(BLACK)) {
+				result ++;
+			}
+			node = node.getLeft();
+		}
+		return result +1;
+	}
 }

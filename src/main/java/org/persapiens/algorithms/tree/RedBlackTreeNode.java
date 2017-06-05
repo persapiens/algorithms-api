@@ -27,5 +27,4 @@ public class RedBlackTreeNode <TN extends RedBlackTreeNode<TN, T>, T extends Com
 		super(key, left, right, parent);
 		this.color = color;
 	}
-
 }

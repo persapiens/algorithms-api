@@ -88,13 +88,13 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return result;
 	}
 
-	public List<T> preorder() {
+	public List<TN> preorder() {
 		return preorder(root, new ArrayList<>());
 	}
 
-	private List<T> preorder(TN x, List<T> result) {
+	private List<TN> preorder(TN x, List<TN> result) {
 		if (x != null) {
-			result.add(x.getKey());
+			result.add(x);
 			result = preorder(x.getLeft(), result);
 			result = preorder(x.getRight(), result);
 		}
@@ -102,15 +102,15 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return result;
 	}
 	
-	public List<T> postorder() {
+	public List<TN> postorder() {
 		return postorder(root, new ArrayList<>());
 	}
 
-	private List<T> postorder(TN x, List<T> result) {
+	private List<TN> postorder(TN x, List<TN> result) {
 		if (x != null) {
 			result = postorder(x.getLeft(), result);
 			result = postorder(x.getRight(), result);
-			result.add(x.getKey());
+			result.add(x);
 		}
 		
 		return result;
@@ -232,6 +232,12 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		if (v != null) {
 			v.setParent(u.getParent());
 		}
+	}
+	
+	public void delete(T key) {
+		TN result = search(key);
+		
+		delete(result);
 	}
 	
 	public void delete(TN z) {
