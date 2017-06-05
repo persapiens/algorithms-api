@@ -14,23 +14,16 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest <IntegerBinar
 	public void exampleACormenPage287 () {
 		IntegerBinaryTree tree = createTree(true, 6, 5, 7, 2);
 		
-		IntegerTreeNode node6 = tree.search(6);
-		IntegerTreeNode node5 = tree.search(5);
-		IntegerTreeNode node7 = tree.search(7);		
-		IntegerTreeNode node2 = tree.search(2);
-		
 		IntegerTreeNode node5x = tree.insert(5);
-		IntegerTreeNode node8 = tree.insert(8);		
 		
-		checkTreeNode(node6, null, node5, node7);		
-		checkTreeNode(node5, node6, node2, node5x);		
-		checkTreeNode(node7, node6, null, node8);		
-		checkTreeNode(node2, node5, null, null);		
-		checkTreeNode(node5x, node5, null, null);		
-		checkTreeNode(node8, node7, null, null);
+		checkTreeNode(tree, 6, null, 5, 7);
+		checkTreeNode(tree.search(5), tree.search(6), tree.search(2), node5x);		
+		checkTreeNode(tree, 7, 6, null, 8);		
+		checkTreeNode(tree, 2, 5, null, null);		
+		checkTreeNode(node5x, tree.search(5), null, null);		
 
 		assertThat(tree.sort())
-			.isEqualTo(Arrays.asList(2,5,5,6,7,8));
+			.isEqualTo(Arrays.asList(2,5,5,6,7));
 	}
 	
 	public void exampleBCormenPage287 () {
@@ -200,5 +193,12 @@ public class IntegerBinaryTreeTest  extends AbstractBinaryTreeTest <IntegerBinar
 		checkTreeNode(node18, node14, node16, null);
 		checkTreeNode(node16, node18, node15, null);
 		checkTreeNode(node15, node16, null, null);
+	}
+	
+	public void testInPrePostOrder() {
+		IntegerBinaryTree tree = createTree(true, 15, 8, 18, 5, 14, 16, 20);
+		System.out.println(tree.sort());
+		System.out.println(tree.preorder());
+		System.out.println(tree.postorder());		
 	}
 }

@@ -18,17 +18,24 @@
 
         <h:body>            
             <h:form id="formOptions">
-                <p:panel>
+                <p:panel id="panel">
                     <h:panelGrid columns="3">
                         <h:outputLabel value="key" />
-                        <p:inputText value="#{integerRedBlackTreeMBean.key}" />
+                        <p:inputText id="key" value="#{integerRedBlackTreeMBean.key}" />
                                      
-                        <p:commandButton value="Adicionar" update=":form:organigram" actionListener="#{integerRedBlackTreeMBean.addKeyAction()}"/>
+                        <p:commandButton value="Adicionar" 
+                                         update=":form:organigram panel" 
+                                         actionListener="#{integerRedBlackTreeMBean.addKeyAction()}"/>
                         
                         <h:outputLabel value="Key selecionada:" />
                         <h:outputLabel id="keySelecionada" value="#{integerRedBlackTreeMBean.selection.data}"/>
                                      
-                        <p:commandButton value="Remover" update=":form:organigram keySelecionada" actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}"/>
+                        <p:commandButton id="deleteKeyButton"
+                                         value="Remover" 
+                                         update=":form:organigram panel" 
+                                         disabled="#{integerRedBlackTreeMBean.tree.isEmpty()}"
+                                         actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}"/>
+                        <p:focus for="key"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
@@ -97,14 +104,14 @@
 
                 <p:contextMenu for="organigram" nodeType="red">
                     <p:menuitem value="remover"
-                                update="organigram :formOptions:keySelecionada"
+                                update="organigram :formOptions:panel"
                                 icon="ui-icon-close"
                                 actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}" />
                 </p:contextMenu>
                 
                 <p:contextMenu for="organigram" nodeType="black">
                     <p:menuitem value="remover"
-                                update="organigram :formOptions:keySelecionada"
+                                update="organigram :formOptions:panel"
                                 icon="ui-icon-close"
                                 actionListener="#{integerRedBlackTreeMBean.deleteKeyAction()}" />
                 </p:contextMenu>

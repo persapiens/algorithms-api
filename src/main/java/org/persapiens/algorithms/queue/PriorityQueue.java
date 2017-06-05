@@ -52,4 +52,16 @@ public class PriorityQueue <T extends Comparable> {
 		items.add(heapSize-1, null);
 		increaseKey(heapSize-1, key);
 	}
+	
+	public void delete(int i) {
+		if (heapSort.compare(items.get(i), items.get(this.heapSize -1))) {
+			increaseKey(i, items.get(this.heapSize -1));
+			this.heapSize -= 1;
+		}
+		else {
+			items.set(i, items.get(this.heapSize - 1));
+			this.heapSize -= 1;
+			heapSort.heapify(items, this.heapSize, i);
+		}
+	}
 }

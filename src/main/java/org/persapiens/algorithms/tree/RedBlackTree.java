@@ -287,5 +287,8 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 		}
 		return result;
 	}
-	
+
+	public boolean isEmpty() {
+		return this.getRoot().equals(this.nill);
+	}
 }

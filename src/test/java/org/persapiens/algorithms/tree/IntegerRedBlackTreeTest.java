@@ -20,6 +20,14 @@ public class IntegerRedBlackTreeTest extends AbstractBinaryTreeTest<IntegerRedBl
 				.isEqualTo(color);
 	}
 	
+	protected void checkTreeNode(IntegerRedBlackTree tree, Integer nodeValue, Integer parentValue, 
+			Integer leftValue, Integer rightValue, RedBlackTreeNodeColor color) {
+		checkTreeNode(tree, nodeValue, parentValue, leftValue, rightValue);
+		
+		assertThat(tree.search(nodeValue).getColor())
+				.isEqualTo(color);
+	}
+	
 	private IntegerRedBlackTree example133CormenPage314() {
 		return createTree(true, 7, 4, 11, 3, 6, 9, 18, 2, 14, 19, 12, 17, 22, 20);
 	}
@@ -251,5 +259,20 @@ public class IntegerRedBlackTreeTest extends AbstractBinaryTreeTest<IntegerRedBl
 		checkTreeNode(node16, node20, tree.getNill(), node17, BLACK);		
 		checkTreeNode(node17, node16, tree.getNill(), tree.getNill(), RED);
 		checkTreeNode(node11, node15, node2, node14, RED);
+	}
+	
+	public void example137CormenPage329CaseA() {
+		IntegerRedBlackTree tree = example133CormenPage314();
+		
+		tree.delete(tree.search(12));
+		tree.delete(tree.search(17));
+		tree.delete(tree.search(19));
+		tree.delete(tree.search(22));
+		tree.delete(tree.search(2));
+		tree.insert(8);
+		
+		tree.delete(tree.search(8));
+
+		//checkTreeNode(tree, null, 11, 20, null, BLACK);		
 	}
 }

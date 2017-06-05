@@ -72,6 +72,8 @@ public abstract class AbstractIntegerTreeMBean <BT extends BinaryTree<TN, Intege
 		rootNode = buildOrganigram(tree.getRoot(), null);
 		
         selection = rootNode;
+		
+		this.key = 0;
 	}
  
     public void deleteKeyAction() {

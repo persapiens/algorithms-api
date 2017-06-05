@@ -87,6 +87,34 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		
 		return result;
 	}
+
+	public List<T> preorder() {
+		return preorder(root, new ArrayList<>());
+	}
+
+	private List<T> preorder(TN x, List<T> result) {
+		if (x != null) {
+			result.add(x.getKey());
+			result = preorder(x.getLeft(), result);
+			result = preorder(x.getRight(), result);
+		}
+		
+		return result;
+	}
+	
+	public List<T> postorder() {
+		return postorder(root, new ArrayList<>());
+	}
+
+	private List<T> postorder(TN x, List<T> result) {
+		if (x != null) {
+			result = postorder(x.getLeft(), result);
+			result = postorder(x.getRight(), result);
+			result.add(x.getKey());
+		}
+		
+		return result;
+	}
 	
 	public TN minimum() {
 		return minimum(root);

@@ -8,8 +8,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author marcelo
  */
 public abstract class AbstractBinaryTreeTest < TREE extends BinaryTree<TN, T>, TN extends TreeNode<TN, T>, T extends Comparable> {
-	protected void checkTreeNode(TN node, TN parent
-		, TN left, TN right) {
+	protected void checkTreeNode(TREE tree, T nodeValue, T parentValue, 
+			T leftValue, T rightValue) {
+		checkTreeNode(tree.search(nodeValue), 
+			parentValue != null ? tree.search(parentValue) : null, 
+			leftValue != null ? tree.search(leftValue) : null, 
+			rightValue != null ? tree.search(rightValue) : null);
+	}
+
+	protected void checkTreeNode(TN node, TN parent, TN left, TN right) {
 		if (parent == null) {
 			assertThat(node.getParent())
 				.isNull();
