@@ -303,7 +303,7 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 			}
 			node = node.getLeft();
 		}
-		return result;
+		return result +1;
 	}
 
 	@Override
