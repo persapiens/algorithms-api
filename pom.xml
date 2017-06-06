@@ -9,8 +9,8 @@
         <relativePath/>
     </parent>
     
-    <groupId>org.persapiens</groupId>
-    <artifactId>algorithms</artifactId>
+    <groupId>org.persapiens.algorithms</groupId>
+    <artifactId>algorithms-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     

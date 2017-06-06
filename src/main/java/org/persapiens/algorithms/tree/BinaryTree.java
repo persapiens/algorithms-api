@@ -43,7 +43,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 	}
 	
 	private TN iterativeSearch(TN x, T k) {
-		while (x != null && !k.equals(x.getKey())) {
+		while (x != null && x.getKey() != null && !k.equals(x.getKey())) {
 			if (k.compareTo(x.getKey()) < 0) {
 				x = x.getLeft();
 			}
@@ -51,7 +51,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 				x = x.getRight();
 			}
 		}
-		
+
 		return x;
 	}
 	
@@ -78,7 +78,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 	}
 
 	// InorderTreeWalk
-	private List<T> sort(TN x, List<T> result) {
+	protected List<T> sort(TN x, List<T> result) {
 		if (x != null) {
 			result = sort(x.getLeft(), result);
 			result.add(x.getKey());
@@ -92,7 +92,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return preorder(root, new ArrayList<>());
 	}
 
-	private List<TN> preorder(TN x, List<TN> result) {
+	protected List<TN> preorder(TN x, List<TN> result) {
 		if (x != null) {
 			result.add(x);
 			result = preorder(x.getLeft(), result);
@@ -106,7 +106,7 @@ public abstract class BinaryTree <TN extends TreeNode<TN, T>, T extends Comparab
 		return postorder(root, new ArrayList<>());
 	}
 
-	private List<TN> postorder(TN x, List<TN> result) {
+	protected List<TN> postorder(TN x, List<TN> result) {
 		if (x != null) {
 			result = postorder(x.getLeft(), result);
 			result = postorder(x.getRight(), result);

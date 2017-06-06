@@ -1,5 +1,6 @@
 package org.persapiens.algorithms.tree;
 
+import java.util.List;
 import lombok.Getter;
 import static org.persapiens.algorithms.tree.RedBlackTreeNodeColor.BLACK;
 import static org.persapiens.algorithms.tree.RedBlackTreeNodeColor.RED;
@@ -293,14 +294,49 @@ public abstract class RedBlackTree <TN extends RedBlackTreeNode<TN, T>, T extend
 	}
 
 	public int getBlackHeight(TN node) {
+		TN initialNode = node;
 		int result = 0;
 		while (!node.equals(this.nill))
 		{
-			if (node.getColor().equals(BLACK)) {
+			if (!node.equals(initialNode) && node.getColor().equals(BLACK)) {
 				result ++;
 			}
 			node = node.getLeft();
 		}
-		return result +1;
+		return result;
 	}
+
+	@Override
+	protected List<T> sort(TN x, List<T> result) {
+		if (!x.equals(this.nill)) {
+			result = sort(x.getLeft(), result);
+			result.add(x.getKey());
+			result = sort(x.getRight(), result);
+		}
+		
+		return result;
+	}
+	
+	@Override
+	protected List<TN> preorder(TN x, List<TN> result) {
+		if (!x.equals(this.nill)) {
+			result.add(x);
+			result = preorder(x.getLeft(), result);
+			result = preorder(x.getRight(), result);
+		}
+		
+		return result;
+	}
+
+	@Override
+	protected List<TN> postorder(TN x, List<TN> result) {
+		if (!x.equals(this.nill)) {
+			result = postorder(x.getLeft(), result);
+			result = postorder(x.getRight(), result);
+			result.add(x);
+		}
+		
+		return result;
+	}
+	
 }
