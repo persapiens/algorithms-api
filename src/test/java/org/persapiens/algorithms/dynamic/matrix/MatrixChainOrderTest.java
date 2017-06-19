@@ -46,4 +46,15 @@ public class MatrixChainOrderTest {
 		assertThat(matrixChainOrder.parens(measure.getS(), 1,6))
 			.isEqualTo("((A1(A2A3))((A4A5)A6))");
 	}
+	
+	@Test
+	public void page378 () {
+		MatrixChainOrder matrixChainOrder = new MatrixChainOrder();
+		int[] p = {5,10,3,12,5,50,6};
+		
+		MatrixChainOrderResult measure = matrixChainOrder.measure(p);
+		
+		assertThat(matrixChainOrder.parens(measure.getS(), 1,6))
+			.isEqualTo("((A1A2)((A3A4)(A5A6)))");
+	}
 }
