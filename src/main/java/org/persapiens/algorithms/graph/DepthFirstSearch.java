@@ -1,5 +1,7 @@
 package org.persapiens.algorithms.graph;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
@@ -15,6 +17,18 @@ import static org.persapiens.algorithms.graph.VertexColor.WHITE;
 @Setter
 public class DepthFirstSearch {
 
+	private List<DepthFirstSearchListener> listeners = new ArrayList<>();
+	
+	public void addListener(DepthFirstSearchListener listener) {
+		listeners.add(listener);
+	}
+	
+	private void fireListener(Vertex v) {
+		listeners.forEach((listener) -> {
+			listener.finished(v);
+		});
+	}
+	
 	public void search(Graph graph) {
 		for (Vertex u : graph.getVertexes()) {
 			u.setColor(WHITE);
@@ -43,22 +57,9 @@ public class DepthFirstSearch {
 		u.setColor(BLACK);
 		time ++;
 		u.setF(time);
-		return time;
-	}
-	
-	public String path(Graph g, Vertex s, Vertex v) {
-		String result = "";
-		if (v.equals(s)) {
-			result = s.getLabel();
-		}
-		else if (v.getParent().equals(NIL)) {
-			result = "no path from " + s.getLabel() + " to " + v.getLabel() + " exists!";
-		}
-		else {
-			result += path(g, s, v.getParent());
-			result += v.getLabel();
-		}
+
+		fireListener(u);
 		
-		return result;
+		return time;
 	}
 }

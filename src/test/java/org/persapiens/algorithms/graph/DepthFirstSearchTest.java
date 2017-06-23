@@ -37,9 +37,6 @@ public class DepthFirstSearchTest {
 		checkVertex(x, BLACK, 4, 5, y);
 		checkVertex(y, BLACK, 3, 6, v);
 		checkVertex(z, BLACK, 10, 11, w);
-		
-		assertThat(depthFirstSearch.path(graph, u, x))
-			.isEqualTo("uvyx");
 	}
 	
 	private void checkVertex(Vertex v, VertexColor color, int d, int f, Vertex parent) {
