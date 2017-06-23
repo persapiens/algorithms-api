@@ -1,6 +1,7 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
 import lombok.Getter;
+import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.list.DoubleLinkedList;
 
 /**

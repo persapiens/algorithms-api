@@ -1,10 +1,13 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
+import org.persapiens.algorithms.graph.VertexAndWeight;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
 import static org.persapiens.algorithms.graph.VertexColor.GRAY;
 import static org.persapiens.algorithms.graph.VertexColor.WHITE;
@@ -48,7 +51,8 @@ public class DepthFirstSearch {
 		time ++;
 		u.setD(time);
 		u.setColor(GRAY);
-		for (Vertex v : graph.getAdjacencyList(u)) {
+		for (VertexAndWeight vertexAndWeight : graph.getAdjacencyList(u)) {
+			Vertex v = vertexAndWeight.getVertex();
 			if (v.getColor().equals(WHITE)) {
 				v.setParent(u);
 				time = visit(graph, v, time);

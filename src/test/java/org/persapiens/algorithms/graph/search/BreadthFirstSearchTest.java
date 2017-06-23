@@ -1,5 +1,8 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
+import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.Vertex;
+import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
@@ -24,14 +27,14 @@ public class BreadthFirstSearchTest {
 		Vertex w = Vertex.builder().label("w").build();
 		Vertex x = Vertex.builder().label("x").build();
 		Vertex y = Vertex.builder().label("y").build();
-		graph.add(r, new Vertex[] {s,v});
-		graph.add(s, new Vertex[] {r,w});
-		graph.add(t, new Vertex[] {u,w,x});
-		graph.add(u, new Vertex[] {t,x,y});
-		graph.add(v, new Vertex[] {r});
-		graph.add(w, new Vertex[] {s,t,x});
-		graph.add(x, new Vertex[] {t,u,w,y});
-		graph.add(y, new Vertex[] {u,x});
+		graph.add(r, GraphUtil.vertexAndWeightArray(s,v));
+		graph.add(s, GraphUtil.vertexAndWeightArray(r,w));
+		graph.add(t, GraphUtil.vertexAndWeightArray(u,w,x));
+		graph.add(u, GraphUtil.vertexAndWeightArray(t,x,y));
+		graph.add(v, GraphUtil.vertexAndWeightArray(r));
+		graph.add(w, GraphUtil.vertexAndWeightArray(s,t,x));
+		graph.add(x, GraphUtil.vertexAndWeightArray(t,u,w,y));
+		graph.add(y, GraphUtil.vertexAndWeightArray(u,x));
 		
 		breadthFirstSearch.search(graph, s);
 

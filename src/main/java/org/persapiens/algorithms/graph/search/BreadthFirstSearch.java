@@ -1,8 +1,11 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
+import org.persapiens.algorithms.graph.VertexAndWeight;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
 import static org.persapiens.algorithms.graph.VertexColor.GRAY;
 import org.persapiens.algorithms.queue.Queue;
@@ -35,7 +38,8 @@ public class BreadthFirstSearch {
 		while (!queue.isEmpty()) {
 			Vertex u = queue.dequeue();
 			
-			for (Vertex v : graph.getAdjacencyList(u)) {
+			for (VertexAndWeight vertexAndWeight : graph.getAdjacencyList(u)) {
+				Vertex v = vertexAndWeight.getVertex();
 				if (v.getColor().equals(WHITE)) {
 					v.setColor(GRAY);
 					v.setD(u.getD() +1);

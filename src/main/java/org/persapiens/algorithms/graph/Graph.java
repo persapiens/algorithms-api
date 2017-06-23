@@ -1,18 +1,3 @@
-/*
- * Copyright 2017 JoinFaces.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.persapiens.algorithms.graph;
 
 import java.util.ArrayList;
@@ -30,7 +15,7 @@ public class Graph {
 
 	private List<VertexAndAdjacencyList> vertexesAndAdjacencyList = new ArrayList<>();
 
-	public void add(Vertex vertex, Vertex[] adjacencyList) {
+	public void add(Vertex vertex, VertexAndWeight[] adjacencyList) {
 		vertexesAndAdjacencyList.add(VertexAndAdjacencyList.builder()
 			.vertex(vertex)
 			.adjacencyList(adjacencyList)
@@ -45,12 +30,12 @@ public class Graph {
 		return result;
 	}
 	
-	public Vertex[] getAdjacencyList(Vertex u) {
+	public VertexAndWeight[] getAdjacencyList(Vertex u) {
 		return getAdjacencyList(indexOf(u));
 	}
 	
-	public Vertex[] getAdjacencyList(int index) {
-		Vertex[] result = null;
+	public VertexAndWeight[] getAdjacencyList(int index) {
+		VertexAndWeight[] result = null;
 		if (index != -1) {
 			result = vertexesAndAdjacencyList.get(index).getAdjacencyList();
 		}
@@ -64,6 +49,38 @@ public class Graph {
 				result = index;
 			}
 		}
+		return result;
+	}
+
+	public List<Edge> getEdges(Vertex vertex) {
+		List<Edge> result;
+		int index = indexOf(vertex);
+		if (index != -1) {
+			result = getEdges(this.vertexesAndAdjacencyList.get(index));
+		}
+		else {
+			result = new ArrayList<>();
+		}
+		return result;
+	}
+	
+	private List<Edge> getEdges(VertexAndAdjacencyList vertexAndAdjacencyList) {
+		List<Edge> result = new ArrayList<>();
+		for (VertexAndWeight vertexAndWeight : vertexAndAdjacencyList.getAdjacencyList()) {
+			result.add(Edge.builder()
+				.u(vertexAndAdjacencyList.getVertex())
+				.v(vertexAndWeight.getVertex())
+				.w(vertexAndWeight.getW())
+				.build());
+		}
+		return result;
+	}
+	
+	public List<Edge> getEdges() {
+		List<Edge> result = new ArrayList<>();
+		vertexesAndAdjacencyList.forEach((vertexAndAdjacencyList) -> {
+			result.addAll(getEdges(vertexAndAdjacencyList));
+		});
 		return result;
 	}
 }

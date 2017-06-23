@@ -1,4 +1,6 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
+
+import org.persapiens.algorithms.graph.Vertex;
 
 /**
  *

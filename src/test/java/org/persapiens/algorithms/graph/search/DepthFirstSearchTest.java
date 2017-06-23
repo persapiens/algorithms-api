@@ -1,5 +1,8 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
+import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.Vertex;
+import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
@@ -22,12 +25,12 @@ public class DepthFirstSearchTest {
 		Vertex x = Vertex.builder().label("x").build();
 		Vertex y = Vertex.builder().label("y").build();
 		Vertex z = Vertex.builder().label("z").build();
-		graph.add(u, new Vertex[] {v,x});
-		graph.add(v, new Vertex[] {y});
-		graph.add(w, new Vertex[] {y,z});
-		graph.add(x, new Vertex[] {v});
-		graph.add(y, new Vertex[] {x});
-		graph.add(z, new Vertex[] {z});
+		graph.add(u, GraphUtil.vertexAndWeightArray(v,x));
+		graph.add(v, GraphUtil.vertexAndWeightArray(y));
+		graph.add(w, GraphUtil.vertexAndWeightArray(y,z));
+		graph.add(x, GraphUtil.vertexAndWeightArray(v));
+		graph.add(y, GraphUtil.vertexAndWeightArray(x));
+		graph.add(z, GraphUtil.vertexAndWeightArray(z));
 		
 		depthFirstSearch.search(graph);
 

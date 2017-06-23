@@ -1,7 +1,11 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.search;
 
+import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.Vertex;
+import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
+import org.persapiens.algorithms.graph.VertexAndWeight;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
 import org.persapiens.algorithms.list.DoubleLinkedList;
 import org.testng.annotations.Test;
@@ -26,15 +30,15 @@ public class TopologicalSortTest {
 		Vertex socks = Vertex.builder().label("socks").build();
 		Vertex shoes = Vertex.builder().label("shoes").build();
 		Vertex watch = Vertex.builder().label("watch").build();
-		graph.add(shirt, new Vertex[] {tie, belt});
-		graph.add(tie, new Vertex[] {jacket});
-		graph.add(jacket, new Vertex[] {});
-		graph.add(belt, new Vertex[] {jacket});
-		graph.add(watch, new Vertex[] {});
-		graph.add(undershorts, new Vertex[] {pants, shoes});
-		graph.add(pants, new Vertex[] {belt, shoes});
-		graph.add(shoes, new Vertex[] {});
-		graph.add(socks, new Vertex[] {shoes});
+		graph.add(shirt, GraphUtil.vertexAndWeightArray(tie, belt));
+		graph.add(tie, GraphUtil.vertexAndWeightArray(jacket));
+		graph.add(jacket, new VertexAndWeight[] {});
+		graph.add(belt, GraphUtil.vertexAndWeightArray(jacket));
+		graph.add(watch, new VertexAndWeight[] {});
+		graph.add(undershorts, GraphUtil.vertexAndWeightArray(pants, shoes));
+		graph.add(pants, GraphUtil.vertexAndWeightArray(belt, shoes));
+		graph.add(shoes, new VertexAndWeight[] {});
+		graph.add(socks, GraphUtil.vertexAndWeightArray(shoes));
 		
 		TopologicalSort topologicalSort = new TopologicalSort();
 		depthFirstSearch.addListener(topologicalSort);

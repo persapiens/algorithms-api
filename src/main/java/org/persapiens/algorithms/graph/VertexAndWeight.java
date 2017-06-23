@@ -3,6 +3,7 @@ package org.persapiens.algorithms.graph;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -10,9 +11,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 @Builder
-public class VertexAndAdjacencyList {
+public class VertexAndWeight {
 	private Vertex vertex;
 	
-	private VertexAndWeight[] adjacencyList;
+	private int w;
 }
