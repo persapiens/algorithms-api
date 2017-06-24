@@ -15,14 +15,6 @@ import org.persapiens.algorithms.queue.PriorityQueue;
 @Getter
 @Setter
 public class PrimMST {	
-	private PriorityQueue<Vertex> createPriorityQueue(Vertex[] vertexes) {
-		PriorityQueue<Vertex> result = new PriorityQueue<>(true);
-		for(Vertex u: vertexes) {
-			result.insert(u);
-		}
-		return result;
-	}
-	
 	public void create(Graph graph, Vertex r) {
 		for (Vertex u : graph.getVertexes()) {
 			u.setD(Integer.MAX_VALUE);
@@ -31,7 +23,7 @@ public class PrimMST {
 
 		r.setD(0);
 		
-		PriorityQueue<Vertex> Q = createPriorityQueue(graph.getVertexes());
+		PriorityQueue<Vertex> Q = PrimMSTUtil.createPriorityQueue(graph.getVertexes());
 			
 		while(!Q.isEmpty()) {
 			Vertex u = Q.extract();

@@ -1,72 +1,72 @@
 package org.persapiens.algorithms.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * @author marcelo
  */
-@Getter
-@Setter
 public class Graph {
 
-	private List<VertexAndAdjacencyList> vertexesAndAdjacencyList = new ArrayList<>();
+	private VertexAndAdjacencyList[] vertexesAndAdjacencyList = new VertexAndAdjacencyList[0];
 
-	public void add(Vertex vertex, VertexAndWeight[] adjacencyList) {
-		vertexesAndAdjacencyList.add(VertexAndAdjacencyList.builder()
+	public void add(Vertex vertex, Edge... edges) {
+		VertexAndAdjacencyList[] newResult = new VertexAndAdjacencyList[vertexesAndAdjacencyList.length+1];
+		System.arraycopy(this.vertexesAndAdjacencyList, 0, newResult, 0, this.vertexesAndAdjacencyList.length);
+		newResult[newResult.length-1] = VertexAndAdjacencyList.builder()
 			.vertex(vertex)
-			.adjacencyList(adjacencyList)
-			.build());
+			.adjacencyList(edges)
+			.build();
+		vertexesAndAdjacencyList = newResult;
 	}
 	
 	public Vertex[] getVertexes() {
-		Vertex[] result = new Vertex[vertexesAndAdjacencyList.size()];
-		for (int index = 0; index < vertexesAndAdjacencyList.size(); index++) {
-			result[index] = vertexesAndAdjacencyList.get(index).getVertex();
+		Vertex[] result = new Vertex[vertexesAndAdjacencyList.length];
+		for (int index = 0; index < vertexesAndAdjacencyList.length; index++) {
+			result[index] = vertexesAndAdjacencyList[index].getVertex();
 		}
 		return result;
 	}
 	
-	public VertexAndWeight[] getAdjacencyList(Vertex u) {
+	public Edge[] getAdjacencyList(Vertex u) {
 		return getAdjacencyList(indexOf(u));
 	}
 	
-	public VertexAndWeight[] getAdjacencyList(int index) {
-		VertexAndWeight[] result = null;
+	public Edge[] getAdjacencyList(int index) {
+		Edge[] result = null;
 		if (index != -1) {
-			result = vertexesAndAdjacencyList.get(index).getAdjacencyList();
+			result = vertexesAndAdjacencyList[index].getAdjacencyList();
 		}
 		return result;
 	}
 
 	private int indexOf(Vertex u) {
 		int result = -1;
-		for (int index = 0; index < vertexesAndAdjacencyList.size(); index++) {
-			if (vertexesAndAdjacencyList.get(index).getVertex().equals(u)) {
+		for (int index = 0; index < vertexesAndAdjacencyList.length; index++) {
+			if (vertexesAndAdjacencyList[index].getVertex().equals(u)) {
 				result = index;
 			}
 		}
 		return result;
 	}
 
-	public List<Edge> getEdges(Vertex vertex) {
-		List<Edge> result;
+	public Edge[] getEdges(Vertex vertex) {
+		Edge[] result;
 		int index = indexOf(vertex);
 		if (index != -1) {
-			result = getEdges(this.vertexesAndAdjacencyList.get(index));
+			result = this.vertexesAndAdjacencyList[index].getAdjacencyList();
 		}
 		else {
-			result = new ArrayList<>();
+			result = new Edge[0];
 		}
 		return result;
 	}
 	
 	public Edge getEdge(Vertex u, Vertex v) {
 		Edge result = null;
-		List<Edge> edges = getEdges(u);
+		Edge[] edges = getEdges(u);
 		if (edges != null) {
 			for (Edge edge : edges) {
 				if (edge.getV().equals(v)) {
@@ -78,23 +78,11 @@ public class Graph {
 		return result;
 	}
 	
-	private List<Edge> getEdges(VertexAndAdjacencyList vertexAndAdjacencyList) {
-		List<Edge> result = new ArrayList<>();
-		for (VertexAndWeight vertexAndWeight : vertexAndAdjacencyList.getAdjacencyList()) {
-			result.add(Edge.builder()
-				.u(vertexAndAdjacencyList.getVertex())
-				.v(vertexAndWeight.getVertex())
-				.w(vertexAndWeight.getW())
-				.build());
-		}
-		return result;
-	}
-	
 	public List<Edge> getEdges() {
 		List<Edge> result = new ArrayList<>();
-		vertexesAndAdjacencyList.forEach((vertexAndAdjacencyList) -> {
-			result.addAll(getEdges(vertexAndAdjacencyList));
-		});
+		for(VertexAndAdjacencyList vertexAndAdjacencyList : vertexesAndAdjacencyList) {
+			result.addAll(Arrays.asList(vertexAndAdjacencyList.getAdjacencyList()));
+		}
 		return result;
 	}
 }

@@ -15,7 +15,7 @@ public class PrimMSTTest {
 	public void page635 () {
 		PrimMST prim = new PrimMST();
 
-		Graph graph = GraphFactory.page635();
+		Graph graph = GraphFactory.page635Graph();
 		Vertex a = graph.getVertexes()[0];
 		
 		prim.create(graph, a);

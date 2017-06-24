@@ -2,7 +2,6 @@ package org.persapiens.algorithms.graph.mst;
 
 import org.persapiens.algorithms.graph.Graph;
 import org.persapiens.algorithms.graph.Vertex;
-import org.persapiens.algorithms.graph.VertexAndWeight;
 import org.persapiens.algorithms.graph.search.GraphUtil;
 
 /**
@@ -10,7 +9,7 @@ import org.persapiens.algorithms.graph.search.GraphUtil;
  * @author marcelo
  */
 public class GraphFactory {
-	public static Graph page635 () {
+	public static Graph page635Graph () {
 		Graph graph = new Graph();
 		
 		Vertex a = Vertex.builder().label("a").build();
@@ -23,40 +22,15 @@ public class GraphFactory {
 		Vertex h = Vertex.builder().label("h").build();
 		Vertex i = Vertex.builder().label("i").build();
 		
-		graph.add(a, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(b,4),
-			GraphUtil.vertexAndWeight(h, 8)));
-		graph.add(b, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(a, 4),
-			GraphUtil.vertexAndWeight(c, 8),
-			GraphUtil.vertexAndWeight(h, 11)));
-		graph.add(c, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(b, 8),
-			GraphUtil.vertexAndWeight(d, 7),
-			GraphUtil.vertexAndWeight(f, 4),
-			GraphUtil.vertexAndWeight(i, 2)));
-		graph.add(d, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(c, 7),
-			GraphUtil.vertexAndWeight(e, 9),
-			GraphUtil.vertexAndWeight(f, 14)));
-		graph.add(e, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(d, 9),
-			GraphUtil.vertexAndWeight(f, 10)));
-		graph.add(f, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(c, 4),
-			GraphUtil.vertexAndWeight(d, 14),
-			GraphUtil.vertexAndWeight(e, 10),
-			GraphUtil.vertexAndWeight(g, 2)));
-		graph.add(g, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(f, 2),
-			GraphUtil.vertexAndWeight(h, 1),
-			GraphUtil.vertexAndWeight(i, 6)));
-		graph.add(h, GraphUtil.vertexAndWeightArray(
-			GraphUtil.vertexAndWeight(a, 8),
-			GraphUtil.vertexAndWeight(b, 11),
-			GraphUtil.vertexAndWeight(g, 1),			
-			GraphUtil.vertexAndWeight(i, 7)));
-		graph.add(i, new VertexAndWeight[] {});
+		graph.add(a, GraphUtil.edges(a, new Vertex[]{b,h}, 4,8));
+		graph.add(b, GraphUtil.edges(b, new Vertex[]{a,c,h}, 4,8,11)); 
+		graph.add(c, GraphUtil.edges(c, new Vertex[]{b,d,f,i}, 8,7,4,2));
+		graph.add(d, GraphUtil.edges(d, new Vertex[]{c,e,f}, 7,9,14));
+		graph.add(e, GraphUtil.edges(e, new Vertex[]{d,f}, 9,10));
+		graph.add(f, GraphUtil.edges(f, new Vertex[]{c,d,e,g}, 4,14,10,2));
+		graph.add(g, GraphUtil.edges(g, new Vertex[]{f,h,i}, 2,1,6));
+		graph.add(h, GraphUtil.edges(h, new Vertex[]{a,b,g,i}, 8,11,1,7));
+		graph.add(i, GraphUtil.edges(i, new Vertex[]{}));
 		
 		return graph;
 	}

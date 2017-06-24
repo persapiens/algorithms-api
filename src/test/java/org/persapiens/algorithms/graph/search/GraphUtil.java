@@ -1,7 +1,7 @@
 package org.persapiens.algorithms.graph.search;
 
+import org.persapiens.algorithms.graph.Edge;
 import org.persapiens.algorithms.graph.Vertex;
-import org.persapiens.algorithms.graph.VertexAndWeight;
 import org.testng.annotations.Test;
 
 /**
@@ -10,32 +10,26 @@ import org.testng.annotations.Test;
  */
 @Test
 public class GraphUtil {
-	public static VertexAndWeight[] vertexAndWeightArray(Vertex... vertexes) {
-		VertexAndWeight[] result = new VertexAndWeight[vertexes.length];
-		for (int index = 0; index < vertexes.length; index ++) {
-			result[index] = VertexAndWeight.builder()
-				.vertex(vertexes[index])
-				.w(0)
-				.build();
+	public static Edge[] edges(Vertex u, Vertex... vs) {
+		int[] weights = new int[vs.length];
+		for (int index = 0; index < weights.length; index ++) {
+			weights[index] = 0;
+		}
+		return edges(u, vs, weights);
+	}
+	
+	public static Edge[] edges(Vertex u, Vertex[] vs, int... weights) {
+		Edge[] result = new Edge[weights.length];
+		for (int index = 0; index < weights.length; index ++) {
+			result[index] = edge(u, vs[index], weights[index]);
 		}
 		return result;
 	}
 	
-	public static VertexAndWeight[] vertexAndWeightArray(VertexAndWeight... vertexesAndWeight) {
-		VertexAndWeight[] result = new VertexAndWeight[vertexesAndWeight.length];
-		for (int index = 0; index < vertexesAndWeight.length; index ++) {
-			VertexAndWeight vertexAndWeight = vertexesAndWeight[index];
-			result[index] = VertexAndWeight.builder()
-				.vertex(vertexAndWeight.getVertex())
-				.w(vertexAndWeight.getW())
-				.build();
-		}
-		return result;
-	}
-	
-	public static VertexAndWeight vertexAndWeight(Vertex vertex, int w) {
-		return VertexAndWeight.builder()
-			.vertex(vertex)
+	public static Edge edge(Vertex u, Vertex v, int w) {
+		return Edge.builder()
+			.u(u)
+			.v(v)
 			.w(w)
 			.build();
 	}

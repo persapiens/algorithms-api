@@ -14,5 +14,5 @@ import lombok.Setter;
 public class VertexAndAdjacencyList {
 	private Vertex vertex;
 	
-	private VertexAndWeight[] adjacencyList;
+	private Edge[] adjacencyList;
 }

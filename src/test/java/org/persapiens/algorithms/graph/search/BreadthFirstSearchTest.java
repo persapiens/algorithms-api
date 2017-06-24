@@ -27,14 +27,14 @@ public class BreadthFirstSearchTest {
 		Vertex w = Vertex.builder().label("w").build();
 		Vertex x = Vertex.builder().label("x").build();
 		Vertex y = Vertex.builder().label("y").build();
-		graph.add(r, GraphUtil.vertexAndWeightArray(s,v));
-		graph.add(s, GraphUtil.vertexAndWeightArray(r,w));
-		graph.add(t, GraphUtil.vertexAndWeightArray(u,w,x));
-		graph.add(u, GraphUtil.vertexAndWeightArray(t,x,y));
-		graph.add(v, GraphUtil.vertexAndWeightArray(r));
-		graph.add(w, GraphUtil.vertexAndWeightArray(s,t,x));
-		graph.add(x, GraphUtil.vertexAndWeightArray(t,u,w,y));
-		graph.add(y, GraphUtil.vertexAndWeightArray(u,x));
+		graph.add(r, GraphUtil.edges(r,s,v));
+		graph.add(s, GraphUtil.edges(s,r,w));
+		graph.add(t, GraphUtil.edges(t,u,w,x));
+		graph.add(u, GraphUtil.edges(u,t,x,y));
+		graph.add(v, GraphUtil.edges(v,r));
+		graph.add(w, GraphUtil.edges(w,s,t,x));
+		graph.add(x, GraphUtil.edges(x,t,u,w,y));
+		graph.add(y, GraphUtil.edges(y,u,x));
 		
 		breadthFirstSearch.search(graph, s);
 

@@ -16,7 +16,7 @@ public class KruskalMSTTest {
 	public void page632 () {
 		KruskalMST kruskal = new KruskalMST();
 
-		Graph graph = GraphFactory.page635();
+		Graph graph = GraphFactory.page635Graph();
 		
 		Set<Edge> mst = kruskal.create(graph);
 		

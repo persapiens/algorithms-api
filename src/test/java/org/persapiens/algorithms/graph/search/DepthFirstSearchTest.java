@@ -25,12 +25,12 @@ public class DepthFirstSearchTest {
 		Vertex x = Vertex.builder().label("x").build();
 		Vertex y = Vertex.builder().label("y").build();
 		Vertex z = Vertex.builder().label("z").build();
-		graph.add(u, GraphUtil.vertexAndWeightArray(v,x));
-		graph.add(v, GraphUtil.vertexAndWeightArray(y));
-		graph.add(w, GraphUtil.vertexAndWeightArray(y,z));
-		graph.add(x, GraphUtil.vertexAndWeightArray(v));
-		graph.add(y, GraphUtil.vertexAndWeightArray(x));
-		graph.add(z, GraphUtil.vertexAndWeightArray(z));
+		graph.add(u, GraphUtil.edges(u,v,x));
+		graph.add(v, GraphUtil.edges(v,y));
+		graph.add(w, GraphUtil.edges(w,y,z));
+		graph.add(x, GraphUtil.edges(x,v));
+		graph.add(y, GraphUtil.edges(y,x));
+		graph.add(z, GraphUtil.edges(z,z));
 		
 		depthFirstSearch.search(graph);
 
