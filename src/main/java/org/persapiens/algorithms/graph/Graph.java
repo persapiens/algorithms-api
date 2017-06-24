@@ -64,6 +64,20 @@ public class Graph {
 		return result;
 	}
 	
+	public Edge getEdge(Vertex u, Vertex v) {
+		Edge result = null;
+		List<Edge> edges = getEdges(u);
+		if (edges != null) {
+			for (Edge edge : edges) {
+				if (edge.getV().equals(v)) {
+					result = edge;
+					break;
+				}
+			}
+		}
+		return result;
+	}
+	
 	private List<Edge> getEdges(VertexAndAdjacencyList vertexAndAdjacencyList) {
 		List<Edge> result = new ArrayList<>();
 		for (VertexAndWeight vertexAndWeight : vertexAndAdjacencyList.getAdjacencyList()) {

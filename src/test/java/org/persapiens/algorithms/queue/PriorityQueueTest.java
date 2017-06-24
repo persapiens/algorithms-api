@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 @Test
 public class PriorityQueueTest {
 	public void arrayWith12Elements () {
-		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(true);
+		PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(false);
 		priorityQueue.insert(0);
 		priorityQueue.insert(1);
 		priorityQueue.insert(2);		
@@ -24,28 +24,28 @@ public class PriorityQueueTest {
 		priorityQueue.insert(13);		
 		priorityQueue.insert(15);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(15);
 		
 		assertThat(priorityQueue.maximum())
 			.isEqualTo(13);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(13);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(12);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(9);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(8);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(7);
 		
-		assertThat(priorityQueue.extractMax())
+		assertThat(priorityQueue.extract())
 			.isEqualTo(6);
 	}
 }

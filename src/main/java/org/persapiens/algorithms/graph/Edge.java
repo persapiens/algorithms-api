@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"u", "v"})
+@EqualsAndHashCode(of = {"u", "v", "w"})
 @Builder
 public class Edge implements Comparable<Edge> {
 	private Vertex u;

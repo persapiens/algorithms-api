@@ -11,17 +11,17 @@ import org.persapiens.algorithms.sort.HeapSort;
 public class PriorityQueue <T extends Comparable> {
 	private List<T> items = new ArrayList<>();
 	private int heapSize = 0;
-	private HeapSort heapSort = HeapSort.builder().ascending(true).build();
+	private HeapSort heapSort;
 
 	public PriorityQueue(boolean ascending) {
-		this.heapSort = HeapSort.builder().ascending(ascending).build();	
+		this.heapSort = HeapSort.builder().ascending(!ascending).build();	
 	}
 	
 	public T maximum() {
 		return items.get(0);
 	}
 	
-	public T extractMax() {
+	public T extract() {
 		if (items.isEmpty()) {
 			throw new RuntimeException("Queue empty - heap underflow!");
 		}
@@ -34,7 +34,7 @@ public class PriorityQueue <T extends Comparable> {
 		return max;
 	}
 	
-	void increaseKey(int i, T key) {
+	private void updateKey(int i, T key) {
 		if (heapSort.compare(key, items.get(i))) {
 			throw new IllegalArgumentException("New key " + key + " is smaller than current key " + items.get(i));
 		}
@@ -46,16 +46,26 @@ public class PriorityQueue <T extends Comparable> {
 			i = heapSort.parent(i);
 		}
 	}
+
+	public void updateKey(T key) {
+		int index = indexOf(key);
+		if (index != -1) {
+			updateKey(index, key);
+		}
+		else {
+			throw new IllegalArgumentException("key " + key + " not included!");
+		}
+	}
 	
 	public void insert (T key) {
 		heapSize ++;
 		items.add(heapSize-1, null);
-		increaseKey(heapSize-1, key);
+		updateKey(heapSize-1, key);
 	}
 	
 	public void delete(int i) {
 		if (heapSort.compare(items.get(i), items.get(this.heapSize -1))) {
-			increaseKey(i, items.get(this.heapSize -1));
+			updateKey(i, items.get(this.heapSize -1));
 			this.heapSize -= 1;
 		}
 		else {
@@ -63,5 +73,17 @@ public class PriorityQueue <T extends Comparable> {
 			this.heapSize -= 1;
 			heapSort.heapify(items, this.heapSize, i);
 		}
+	}
+	
+	public boolean isEmpty() {
+		return this.heapSize == 0;
+	}
+	
+	public boolean contains(T item) {
+		return this.items.subList(0, heapSize).contains(item);
+	}
+
+	private int indexOf(T item) {
+		return this.items.subList(0, heapSize).indexOf(item);
 	}
 }
