@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.search;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ public class DepthFirstSearchTest {
 	public void page605 () {
 		DepthFirstSearch depthFirstSearch = new DepthFirstSearch();
 
-		Graph graph = new Graph();
+		ListGraph graph = new ListGraph();
 		
 		Vertex u = Vertex.builder().label("u").build();
 		Vertex v = Vertex.builder().label("v").build();

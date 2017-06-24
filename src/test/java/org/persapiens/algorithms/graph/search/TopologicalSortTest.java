@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.search;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +18,7 @@ public class TopologicalSortTest {
 	public void page613 () {
 		DepthFirstSearch depthFirstSearch = new DepthFirstSearch();
 
-		Graph graph = new Graph();
+		ListGraph graph = new ListGraph();
 		
 		Vertex undershorts = Vertex.builder().label("undershorts").build();
 		Vertex pants = Vertex.builder().label("pants").build();

@@ -3,7 +3,7 @@ package org.persapiens.algorithms.graph.sssp;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.graph.mst.PrimMSTUtil;
 import org.persapiens.algorithms.queue.PriorityQueue;
@@ -15,7 +15,7 @@ import org.persapiens.algorithms.queue.PriorityQueue;
 @Getter
 @Setter
 public class Dijkstra {	
-	public Vertex[] create(Graph graph, Vertex s) {
+	public Vertex[] create(ListGraph graph, Vertex s) {
 		SSSPUtil.initializeSingleSource(graph, s);
 
 		Vertex[] vertexes = graph.getVertexes();

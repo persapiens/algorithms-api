@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
@@ -32,7 +32,7 @@ public class DepthFirstSearch {
 		});
 	}
 	
-	public void search(Graph graph) {
+	public void search(ListGraph graph) {
 		for (Vertex u : graph.getVertexes()) {
 			u.setColor(WHITE);
 			u.setParent(NIL);
@@ -47,7 +47,7 @@ public class DepthFirstSearch {
 		}
 	}
 
-	private int visit(Graph graph, Vertex u, int time) {
+	private int visit(ListGraph graph, Vertex u, int time) {
 		time ++;
 		u.setD(time);
 		u.setColor(GRAY);

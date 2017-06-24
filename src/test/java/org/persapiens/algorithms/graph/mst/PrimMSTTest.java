@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.mst;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
@@ -15,7 +15,7 @@ public class PrimMSTTest {
 	public void page635 () {
 		PrimMST prim = new PrimMST();
 
-		Graph graph = GraphFactory.page635Graph();
+		ListGraph graph = GraphFactory.page635Graph();
 		Vertex a = graph.getVertexes()[0];
 		
 		prim.create(graph, a);

@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.search;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.graph.VertexColor;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ public class BreadthFirstSearchTest {
 	public void page596 () {
 		BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
 
-		Graph graph = new Graph();
+		ListGraph graph = new ListGraph();
 		
 		Vertex r = Vertex.builder().label("r").build();
 		Vertex s = Vertex.builder().label("s").build();

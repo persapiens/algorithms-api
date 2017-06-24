@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.mst;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.graph.search.GraphUtil;
 
@@ -9,8 +9,8 @@ import org.persapiens.algorithms.graph.search.GraphUtil;
  * @author marcelo
  */
 public class GraphFactory {
-	public static Graph page635Graph () {
-		Graph graph = new Graph();
+	public static ListGraph page635Graph () {
+		ListGraph graph = new ListGraph();
 		
 		Vertex a = Vertex.builder().label("a").build();
 		Vertex b = Vertex.builder().label("b").build();

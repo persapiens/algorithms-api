@@ -1,7 +1,7 @@
 package org.persapiens.algorithms.graph.mst;
 
 import java.util.Set;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.persapiens.algorithms.graph.Edge;
@@ -16,7 +16,7 @@ public class KruskalMSTTest {
 	public void page632 () {
 		KruskalMST kruskal = new KruskalMST();
 
-		Graph graph = GraphFactory.page635Graph();
+		ListGraph graph = GraphFactory.page635Graph();
 		
 		Set<Edge> mst = kruskal.create(graph);
 		

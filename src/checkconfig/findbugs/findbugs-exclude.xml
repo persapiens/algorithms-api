@@ -13,11 +13,11 @@
         <Bug pattern="UMAC_UNCALLABLE_METHOD_OF_ANONYMOUS_CLASS" />
     </Match>
     <Match>
-        <Method returns="java.util.Date" />
+        <Package name="org.persapiens.algorithms.graph.*" />
         <Bug pattern="EI_EXPOSE_REP" />
     </Match>
     <Match>
-        <Method params="java.util.Date" />
+        <Package name="org.persapiens.algorithms.graph.*" />
         <Bug pattern="EI_EXPOSE_REP2" />
     </Match>
 </FindBugsFilter>

@@ -3,7 +3,7 @@ package org.persapiens.algorithms.graph.search;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
@@ -19,7 +19,7 @@ import static org.persapiens.algorithms.graph.VertexColor.WHITE;
 @Setter
 public class BreadthFirstSearch {
 
-	public void search(Graph graph, Vertex initialVertex) {
+	public void search(ListGraph graph, Vertex initialVertex) {
 		for (Vertex vertex : graph.getVertexes()) {
 			if (!initialVertex.equals(vertex)) {
 				vertex.setColor(WHITE);
@@ -51,7 +51,7 @@ public class BreadthFirstSearch {
 		}
 	}
 	
-	public String path(Graph g, Vertex s, Vertex v) {
+	public String path(ListGraph g, Vertex s, Vertex v) {
 		String result = "";
 		if (v.equals(s)) {
 			result = s.getLabel();

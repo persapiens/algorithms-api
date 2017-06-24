@@ -3,7 +3,7 @@ package org.persapiens.algorithms.graph.sssp;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 
 /**
@@ -13,7 +13,7 @@ import org.persapiens.algorithms.graph.Vertex;
 @Getter
 @Setter
 public class BellmanFord {	
-	public boolean create(Graph graph, Vertex s) {
+	public boolean create(ListGraph graph, Vertex s) {
 		boolean result = true;
 		SSSPUtil.initializeSingleSource(graph, s);
 		Relax relax = new Relax();

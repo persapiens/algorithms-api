@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author marcelo
  */
-public class Graph {
+public class ListGraph {
 
 	private VertexAndAdjacencyList[] vertexesAndAdjacencyList = new VertexAndAdjacencyList[0];
 

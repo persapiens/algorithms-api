@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.sssp;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
  */
 @Test
 public class DijkstraTest {
-	private Graph page659Graph () {
-		Graph graph = new Graph();
+	private ListGraph page659Graph () {
+		ListGraph graph = new ListGraph();
 		
 		Vertex s = Vertex.builder().label("s").build();
 		Vertex t = Vertex.builder().label("t").build();
@@ -34,7 +34,7 @@ public class DijkstraTest {
 	public void page632 () {
 		Dijkstra dijkstra = new Dijkstra();
 
-		Graph graph = page659Graph();
+		ListGraph graph = page659Graph();
 		Vertex s = graph.getVertexes()[0];
 		
 		Vertex[] sssp = dijkstra.create(graph, s);

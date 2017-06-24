@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.sssp;
 
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
 @Test
 public class BellmanFordTest {
 	
-	private Graph page652Graph () {
-		Graph graph = new Graph();
+	private ListGraph page652Graph () {
+		ListGraph graph = new ListGraph();
 		
 		Vertex s = Vertex.builder().label("s").build();
 		Vertex t = Vertex.builder().label("t").build();
@@ -35,7 +35,7 @@ public class BellmanFordTest {
 	public void page652 () {
 		BellmanFord bellmanFord = new BellmanFord();
 
-		Graph graph = page652Graph();
+		ListGraph graph = page652Graph();
 		Vertex s = graph.getVertexes()[4];
 		
 		boolean created = bellmanFord.create(graph, s);

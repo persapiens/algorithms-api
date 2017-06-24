@@ -7,7 +7,7 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
-import org.persapiens.algorithms.graph.Graph;
+import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
 import org.persapiens.algorithms.sort.QuickSort;
 
@@ -18,7 +18,7 @@ import org.persapiens.algorithms.sort.QuickSort;
 @Getter
 @Setter
 public class KruskalMST {	
-	public Set<Edge> create(Graph graph) {
+	public Set<Edge> create(ListGraph graph) {
 		Set<Edge> result = new HashSet<>();
 		
 		DisjointSet<Vertex> disjointSet = new DisjointSet<>();
