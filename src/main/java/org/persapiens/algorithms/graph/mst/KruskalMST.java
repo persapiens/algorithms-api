@@ -1,6 +1,6 @@
 package org.persapiens.algorithms.graph.mst;
 
-import org.persapiens.algorithms.graph.set.DisjointSet;
+import org.persapiens.algorithms.set.DisjointSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

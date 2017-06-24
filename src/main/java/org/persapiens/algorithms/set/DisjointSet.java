@@ -1,4 +1,4 @@
-package org.persapiens.algorithms.graph.set;
+package org.persapiens.algorithms.set;
 
 import java.util.ArrayList;
 import java.util.Arrays;
