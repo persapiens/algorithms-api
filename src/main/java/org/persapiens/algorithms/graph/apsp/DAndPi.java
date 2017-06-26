@@ -11,12 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class WeightsAndPaths {
-	Matrix weights;
+public class DAndPi {
+	Matrix d;
 	
-	Matrix paths;
-	
-	public int[] path(int i, int j) {
-		return null;
-	}
+	Matrix pi;
 }

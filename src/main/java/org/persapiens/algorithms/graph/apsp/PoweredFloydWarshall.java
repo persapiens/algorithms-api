@@ -21,7 +21,7 @@ public class PoweredFloydWarshall {
 		return result;
 	}
 	
-	public WeightsAndPaths create(Matrix W) {
+	public DAndPi create(Matrix W) {
 		int n = W.getRows();
 		
 		Matrix D = W;
@@ -54,9 +54,25 @@ public class PoweredFloydWarshall {
 			}
 		}		
 		
-		return WeightsAndPaths.builder()
-			.weights(D)
-			.paths(Pi)
+		return DAndPi.builder()
+			.d(D)
+			.pi(Pi)
 			.build();
+	}
+	
+	public String path(Matrix Pi, int i, int j) {
+		String result;
+		
+		if (i == j) {
+			result = Integer.toString(i);
+		} 
+		else if (Pi.get(i, j).equals(NIL)) {
+			throw new IllegalArgumentException("no path from " + i + " to " + j + "exists!");
+		}
+		else {
+			result = path(Pi, i, Pi.get(i, j));
+			result = result + " " + j;
+		}
+		return result;
 	}
 }
