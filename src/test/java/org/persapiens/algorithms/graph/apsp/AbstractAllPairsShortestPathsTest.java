@@ -1,6 +1,5 @@
 package org.persapiens.algorithms.graph.apsp;
 
-import org.persapiens.algorithms.graph.Matrix;
 import org.testng.annotations.Test;
 
 /**

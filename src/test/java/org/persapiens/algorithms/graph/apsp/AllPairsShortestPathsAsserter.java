@@ -1,8 +1,7 @@
 package org.persapiens.algorithms.graph.apsp;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.persapiens.algorithms.graph.Matrix;
-import static org.persapiens.algorithms.graph.Matrix.NIL;
+import static org.persapiens.algorithms.graph.apsp.Matrix.NIL;
 
 /**
  *

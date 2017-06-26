@@ -1,7 +1,6 @@
 package org.persapiens.algorithms.graph.apsp;
 
-import org.persapiens.algorithms.graph.Matrix;
-import static org.persapiens.algorithms.graph.Matrix.INFINITY;
+import static org.persapiens.algorithms.graph.apsp.Matrix.INFINITY;
 
 /**
  *

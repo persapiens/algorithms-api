@@ -1,7 +1,7 @@
 package org.persapiens.algorithms.graph.sssp;
 
 import org.persapiens.algorithms.graph.ListGraph;
-import static org.persapiens.algorithms.graph.Matrix.INFINITY;
+import static org.persapiens.algorithms.graph.apsp.Matrix.INFINITY;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 

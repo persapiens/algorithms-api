@@ -1,4 +1,4 @@
-package org.persapiens.algorithms.graph;
+package org.persapiens.algorithms.graph.apsp;
 
 /**
  *

@@ -3,7 +3,6 @@ package org.persapiens.algorithms.graph.apsp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.persapiens.algorithms.graph.Matrix;
 
 /**
  *
