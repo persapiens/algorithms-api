@@ -52,7 +52,7 @@ under the License.
   <rule ref="rulesets/java/imports.xml"/>
   <rule ref="rulesets/java/imports.xml/TooManyStaticImports">
     <properties>
-      <property name="maximumStaticImports" value="5"/>     
+      <property name="maximumStaticImports" value="5"/>
     </properties>
   </rule>
 
