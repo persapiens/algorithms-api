@@ -6,24 +6,27 @@ package org.persapiens.algorithms.graph;
  */
 public class Matrix {
 
-	private int[][] element;
+	private Integer[][] element;
 
-	public int getRows() {
+	public static final Integer NIL = new Integer(Integer.MIN_VALUE);
+	public static final Integer INFINITY = new Integer(Integer.MAX_VALUE / 2);
+	
+	public Integer getRows() {
 		return element.length;
 	}
 
-	public int get(int r, int c) {
+	public Integer get(int r, int c) {
 		return element[r][c];
 	}
 	
-	public void set(int r, int c, int w) {
+	public void set(int r, int c, Integer w) {
 		element[r][c] = w;
 	}
 	
 	public Matrix(int numberOfVertexes) {
-		element = new int[numberOfVertexes][numberOfVertexes];
+		element = new Integer[numberOfVertexes][numberOfVertexes];
 		for (int i = 0; i < numberOfVertexes; i++) {
-			element[i] = new int[numberOfVertexes];
+			element[i] = new Integer[numberOfVertexes];
 		}
 	}
 }

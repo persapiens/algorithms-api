@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class ListGraph {
 
+	public static final Integer INFINITY = new Integer(Integer.MAX_VALUE / 2);
+	
 	private VertexAndAdjacencyList[] vertexesAndAdjacencyList = new VertexAndAdjacencyList[0];
 
 	public void add(Vertex vertex, Edge... edges) {

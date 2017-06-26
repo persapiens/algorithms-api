@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
 import org.persapiens.algorithms.graph.ListGraph;
+import static org.persapiens.algorithms.graph.ListGraph.INFINITY;
 import org.persapiens.algorithms.graph.Vertex;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import org.persapiens.algorithms.queue.PriorityQueue;
@@ -17,7 +18,7 @@ import org.persapiens.algorithms.queue.PriorityQueue;
 public class PrimMST {	
 	public void create(ListGraph graph, Vertex r) {
 		for (Vertex u : graph.getVertexes()) {
-			u.setD(Integer.MAX_VALUE);
+			u.setD(INFINITY);
 			u.setParent(NIL);
 		}
 

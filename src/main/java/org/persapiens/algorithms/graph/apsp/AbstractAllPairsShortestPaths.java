@@ -1,6 +1,7 @@
 package org.persapiens.algorithms.graph.apsp;
 
 import org.persapiens.algorithms.graph.Matrix;
+import static org.persapiens.algorithms.graph.Matrix.INFINITY;
 
 /**
  *
@@ -13,7 +14,7 @@ public abstract class AbstractAllPairsShortestPaths implements AllPairsShortestP
 		Matrix LL = new Matrix(L.getRows());
 		for (int i=0; i < n; i++) {
 			for (int j=0; j < n; j++) {
-				LL.set(i, j, Integer.MAX_VALUE / 2);
+				LL.set(i, j, INFINITY);
 				for (int k =0; k < n; k++) {
 					LL.set(i, j, Integer.min(LL.get(i, j), L.get(i, k) + W.get(k, j)));
 				}

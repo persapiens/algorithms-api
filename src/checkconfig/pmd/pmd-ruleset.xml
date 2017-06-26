@@ -50,6 +50,11 @@ under the License.
   </rule>
 
   <rule ref="rulesets/java/imports.xml"/>
+  <rule ref="rulesets/java/imports.xml/TooManyStaticImports">
+    <properties>
+      <property name="maximumStaticImports" value="5"/>     
+    </properties>
+  </rule>
 
   <rule ref="rulesets/java/braces.xml"/>
   <rule ref="rulesets/java/codesize.xml"/>

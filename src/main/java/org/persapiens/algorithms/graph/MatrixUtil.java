@@ -1,5 +1,7 @@
 package org.persapiens.algorithms.graph;
 
+import static org.persapiens.algorithms.graph.Matrix.INFINITY;
+
 /**
  *
  * @author marcelo
@@ -13,7 +15,7 @@ public class MatrixUtil {
 					w.set(i,j, 0);
 				}
 				else {
-					w.set(i,j, Integer.MAX_VALUE / 2);
+					w.set(i,j, INFINITY);
 				}
 			}
 		}

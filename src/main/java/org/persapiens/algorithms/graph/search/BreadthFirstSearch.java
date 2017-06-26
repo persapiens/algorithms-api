@@ -5,10 +5,11 @@ import lombok.Setter;
 import org.persapiens.algorithms.graph.Edge;
 import org.persapiens.algorithms.graph.ListGraph;
 import org.persapiens.algorithms.graph.Vertex;
+import org.persapiens.algorithms.queue.Queue;
+import static org.persapiens.algorithms.graph.ListGraph.INFINITY;
 import static org.persapiens.algorithms.graph.Vertex.NIL;
 import static org.persapiens.algorithms.graph.VertexColor.BLACK;
 import static org.persapiens.algorithms.graph.VertexColor.GRAY;
-import org.persapiens.algorithms.queue.Queue;
 import static org.persapiens.algorithms.graph.VertexColor.WHITE;
 
 /**
@@ -23,7 +24,7 @@ public class BreadthFirstSearch {
 		for (Vertex vertex : graph.getVertexes()) {
 			if (!initialVertex.equals(vertex)) {
 				vertex.setColor(WHITE);
-				vertex.setD(Integer.MAX_VALUE);
+				vertex.setD(INFINITY);
 				vertex.setParent(NIL);
 			}
 			else {
