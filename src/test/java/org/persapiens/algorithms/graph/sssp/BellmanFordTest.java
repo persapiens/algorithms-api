@@ -32,7 +32,7 @@ public class BellmanFordTest {
 		return graph;
 	}
 	
-	public void page652 () {
+	public void page652S () {
 		BellmanFord bellmanFord = new BellmanFord();
 
 		ListGraph graph = page652Graph();
@@ -68,5 +68,81 @@ public class BellmanFordTest {
 				
 		assertThat(created)
 			.isTrue();
+	}
+	
+	public void page652Z () {
+		BellmanFord bellmanFord = new BellmanFord();
+
+		ListGraph graph = page652Graph();
+		Vertex s = graph.getVertexes()[4];
+		Vertex t = graph.getVertexes()[0];
+		Vertex x = graph.getVertexes()[1];
+		Vertex z = graph.getVertexes()[3];
+		Vertex y = graph.getVertexes()[2];
+
+		boolean created = bellmanFord.create(graph, z);
+		
+		assertThat(s.getD())
+			.isEqualTo(2);
+		assertThat(s.getParent())
+			.isEqualTo(z);
+		assertThat(t.getD())
+			.isEqualTo(4);
+		assertThat(t.getParent())
+			.isEqualTo(x);
+		assertThat(x.getD())
+			.isEqualTo(6);
+		assertThat(x.getParent())
+			.isEqualTo(y);
+		assertThat(z.getD())
+			.isEqualTo(0);
+		assertThat(z.getParent())
+			.isEqualTo(NIL);
+		assertThat(y.getD())
+			.isEqualTo(9);
+		assertThat(y.getParent())
+			.isEqualTo(s);
+				
+		assertThat(created)
+			.isTrue();
+	}
+	
+	public void page652SComZX4 () {
+		BellmanFord bellmanFord = new BellmanFord();
+
+		ListGraph graph = page652Graph();
+		Vertex s = graph.getVertexes()[4];		
+		Vertex t = graph.getVertexes()[0];
+		Vertex x = graph.getVertexes()[1];
+		Vertex z = graph.getVertexes()[3];
+		Vertex y = graph.getVertexes()[2];
+
+		graph.getEdge(z, x).setW(4);
+		
+		boolean created = bellmanFord.create(graph, s);
+		
+		assertThat(s.getD())
+			.isEqualTo(0);
+		assertThat(s.getParent())
+			.isEqualTo(NIL);
+		assertThat(t.getD())
+			.isEqualTo(2);
+		assertThat(t.getParent())
+			.isEqualTo(x);
+		assertThat(x.getD())
+			.isEqualTo(2);
+		assertThat(x.getParent())
+			.isEqualTo(z);
+		assertThat(z.getD())
+			.isEqualTo(-2);
+		assertThat(z.getParent())
+			.isEqualTo(t);
+		assertThat(y.getD())
+			.isEqualTo(7);
+		assertThat(y.getParent())
+			.isEqualTo(s);
+				
+		assertThat(created)
+			.isFalse();
 	}
 }

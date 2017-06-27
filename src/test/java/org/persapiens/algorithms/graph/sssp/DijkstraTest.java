@@ -31,7 +31,7 @@ public class DijkstraTest {
 		return graph;
 	}
 	
-	public void page632 () {
+	public void page659 () {
 		Dijkstra dijkstra = new Dijkstra();
 
 		ListGraph graph = page659Graph();
